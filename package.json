@@ -1,0 +1,12 @@
+{
+  "name": "nepali-date-picker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "nepali-date-picker"
+  ],
+  "author": "Anuj Pandey",
+  "license": "MIT"
+}
