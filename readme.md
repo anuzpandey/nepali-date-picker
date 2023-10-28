@@ -23,7 +23,10 @@
 #### Config Options
 ```javascript
 let config = {
-    format: 'YYYY-MM-DD',           // 'YYYY-MM-DD', 'YYYY/MM/DD', 'YYYY.MM.DD', 'DD-MM-YYYY', 'DD/MM/YYYY', 'DD.MM.YYYY'   
+    format: 'YYYY-MM-DD',           // 'YYYY-MM-DD', 'YYYY/MM/DD', 'YYYY.MM.DD', 'DD-MM-YYYY', 'DD/MM/YYYY', 'DD.MM.YYYY'  
+    disableAfterToday: false,       // boolean: true | false
+    disableBeforeToday: false,      // boolean: true | false
+    disableToday: false,            // boolean: true | false
     closeOnDateSelect: true,        // boolean: true | false
     markHolidays: true,             // boolean: true | false
     holidays: ['Saturday'],         // ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
