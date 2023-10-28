@@ -1,3 +1,6 @@
+### Nepali Date Picker: A Lightweight, Powerful Nepali Date Picker
+![branding-image.jpg](images%2Fbranding-image.png)
+
 ## INSTALLATION
 
 - Add nepali-date-picker.min.js
