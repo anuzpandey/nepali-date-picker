@@ -1,6 +1,6 @@
 ## INSTALLATION
 
-- Add ap-picker.min.js
+- Add nepali-date-picker.min.js
 - Add ap-picker.min.css
 
 ### USAGE
@@ -9,13 +9,13 @@
 
 ```html
 
-<link rel="stylesheet" href="./css/ap-picker.min.css">
+<link rel="stylesheet" href="./css/nepali-date-picker.min.css">
 
 <!-- Add data-nepali-date-picker="unique_value" attribute to input field -->
 <input type="text" readonly data-nepali-date-picker="date_of_birth" placeholder="YYYY-MM-DD">
 <input type="text" readonly data-nepali-date-picker="registered_at" placeholder="YYYY-MM-DD">
 
-<script src="./js/ap-picker.js"></script>
+<script src="./js/nepali-date-picker.min.js"></script>
 
 <script>
     new NepaliDatePicker()
