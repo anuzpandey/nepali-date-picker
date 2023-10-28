@@ -1,25 +1,40 @@
 ## INSTALLATION
 
 - Add nepali-date-picker.min.js
-- Add ap-picker.min.css
+- Add nepali-date-picker.min.css
 
 ### USAGE
-
-### Nepali Date Picker
-
 ```html
-
+<!-- Add to the head section -->
 <link rel="stylesheet" href="./css/nepali-date-picker.min.css">
 
 <!-- Add data-nepali-date-picker="unique_value" attribute to input field -->
 <input type="text" readonly data-nepali-date-picker="date_of_birth" placeholder="YYYY-MM-DD">
-<input type="text" readonly data-nepali-date-picker="registered_at" placeholder="YYYY-MM-DD">
 
+<!-- Add to the end of body section -->
 <script src="js/nepali-date-picker.min.js"></script>
 
 <script>
+    // Initialize Nepali Date Picker
     new NepaliDatePicker()
 </script>
+```
+
+#### Config Options
+```javascript
+let config = {
+    format: 'YYYY-MM-DD',           // 'YYYY-MM-DD', 'YYYY/MM/DD', 'YYYY.MM.DD', 'DD-MM-YYYY', 'DD/MM/YYYY', 'DD.MM.YYYY'   
+    closeOnDateSelect: true,        // boolean: true | false
+    markHolidays: true,             // boolean: true | false
+    holidays: ['Saturday'],         // ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    indicateCurrentDate: true,      // boolean: true | false
+    setCurrentDate: false,          // boolean: true | false
+    position: 'left',               // 'left', 'right' or 'center'
+    daysFormat: 'dd',               // 'ddd' for full day name, 'dd' for short day name, 'd' for 1 letter day name
+    locale: 'np',                   // 'np' for nepali, 'en' for english
+    theme: 'flat',                  // bordered | soft | flat
+    darkMode: false,                // boolean: true | false
+}
 ````
 
 #### English Date to Nepali Date Conversion
