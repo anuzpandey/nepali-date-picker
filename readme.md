@@ -15,7 +15,7 @@
 <input type="text" readonly data-nepali-date-picker="date_of_birth" placeholder="YYYY-MM-DD">
 <input type="text" readonly data-nepali-date-picker="registered_at" placeholder="YYYY-MM-DD">
 
-<script src="./js/nepali-date-picker.min.js"></script>
+<script src="js/nepali-date-picker.min.js"></script>
 
 <script>
     new NepaliDatePicker()
@@ -78,6 +78,6 @@ NepaliDatePicker.convertToNepaliDate(2053, 1, 10)
       - [x] ~~Nepali~~
     - [ ] Date Picker Theme
         - [x] ~~Light~~
-        - [ ] Dark
+        - [x] ~~Dark~~
     - [ ] Min Date
     - [ ] Max Date
