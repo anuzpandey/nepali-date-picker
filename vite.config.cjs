@@ -14,7 +14,7 @@ export default defineConfig({
                 main: resolve(root, 'index.html'),
                 docs: resolve(root, 'docs', 'index.html'),
                 examples: resolve(root, 'examples', 'index.html'),
-            }
-        }
+            },
+        },
     }
 })
