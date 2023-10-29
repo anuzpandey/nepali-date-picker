@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8"/>
@@ -6,28 +6,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Documentation - Nepali Date Picker</title>
 
-        <meta property="og:title" content="Documentation - Nepali Date Picker" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://nepali-date-picker.vercel.app/" />
-        <meta property="og:image" content="../assets/images/branding-image.png" />
-        <meta property="og:description" content="Lightweight, Powerful JavaScript Nepali Date Picker with no dependencies." />
-        <meta property="og:site_name" content="Nepali Date Picker" />
+        <meta property="og:title" content="Documentation - Nepali Date Picker"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://nepali-date-picker.vercel.app/"/>
+        <meta property="og:image" content="../assets/images/branding-image.png"/>
+        <meta property="og:description" content="Lightweight, Powerful JavaScript Nepali Date Picker with no dependencies."/>
+        <meta property="og:site_name" content="Nepali Date Picker"/>
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="nepali-date-picker.vercel.app" />
-        <meta property="twitter:url" content="https://nepali-date-picker.vercel.app/" />
-        <meta name="twitter:title" content="Documentation - Nepali Date Picker" />
-        <meta name="twitter:description" content="Lightweight, Powerful JavaScript Nepali Date Picker with no dependencies." />
-        <meta name="twitter:image" content="../assets/images/branding-image.png" />
-
-
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta property="twitter:domain" content="nepali-date-picker.vercel.app"/>
+        <meta property="twitter:url" content="https://nepali-date-picker.vercel.app/"/>
+        <meta name="twitter:title" content="Documentation - Nepali Date Picker"/>
+        <meta name="twitter:description" content="Lightweight, Powerful JavaScript Nepali Date Picker with no dependencies."/>
+        <meta name="twitter:image" content="../assets/images/branding-image.png"/>
     </head>
-    <body class="bg-gray-900 overflow-x-hidden min-h-screen">
-        <div class="isolate bg-slate-900 min-h-screen relative">
 
+    <body class="bg-gray-900 overflow-x-hidden min-h-screen">
+        <div class="isolate bg-slate-900 min-h-screen relative" id="app-wrapper">
             <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-x-hidden blur-3xl sm:top-[-20rem]">
                 <svg class="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]" viewBox="0 0 1155 678">
-                    <path fill="url(#f4773080-2a16-4ab4-9fd7-579fec69a4f7)" fill-opacity=".2" d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"/>
+                    <path
+                        fill="url(#f4773080-2a16-4ab4-9fd7-579fec69a4f7)"
+                        fill-opacity=".2"
+                        d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
+                    />
                     <defs>
                         <linearGradient id="f4773080-2a16-4ab4-9fd7-579fec69a4f7" x1="1155.49" x2="-78.208" y1=".177" y2="474.645" gradientUnits="userSpaceOnUse">
                             <stop stop-color="#9089FC"></stop>
@@ -37,12 +39,12 @@
                 </svg>
             </div>
 
-            <div class="mx-auto max-w-7xl px-6 lg:px-8 py-6" x-data="{mobileMenu: false}">
+            <div id="header_wrapper" class="mx-auto max-w-7xl px-6 lg:px-8 py-6" x-data="{mobileMenu: false}">
                 <nav class="flex items-center justify-between" aria-label="Global">
                     <div class="flex lg:flex-1">
                         <a href="/" class="-m-1.5 p-1.5">
                             <span class="sr-only">Nepali Date Picker</span>
-                            <img class="h-10" src="../assets/images/logo.svg" alt="">
+                            <img class="h-10" src="../assets/images/logo.svg" alt=""/>
                         </a>
                     </div>
                     <div class="flex md:hidden">
@@ -62,13 +64,17 @@
                         <a href="https://github.com/anuzpandey/nepali-date-picker" target="_blank" class="block text-white hover:text-gray-600 transition-all">
                             <svg class="h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <title>GitHub</title>
-                                <path d="M10 0a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69a3.6 3.6 0 0 1 .1-2.64s.84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.4.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .26.18.58.69.48A10 10 0 0 0 10 0"></path>
+                                <path
+                                    d="M10 0a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69a3.6 3.6 0 0 1 .1-2.64s.84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.4.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .26.18.58.69.48A10 10 0 0 0 10 0"
+                                ></path>
                             </svg>
                         </a>
                         <a href="https://twitter.com/_anuz_pandey" class="block text-white hover:text-gray-600 transition-all" target="_blank">
                             <svg class="h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <title>Twitter</title>
-                                <path d="M6.29 18.25c7.55 0 11.67-6.25 11.67-11.67v-.53c.8-.59 1.49-1.3 2.04-2.13-.75.33-1.54.55-2.36.65a4.12 4.12 0 0 0 1.8-2.27c-.8.48-1.68.81-2.6 1a4.1 4.1 0 0 0-7 3.74 11.65 11.65 0 0 1-8.45-4.3 4.1 4.1 0 0 0 1.27 5.49C2.01 8.2 1.37 8.03.8 7.7v.05a4.1 4.1 0 0 0 3.3 4.03 4.1 4.1 0 0 1-1.86.07 4.1 4.1 0 0 0 3.83 2.85A8.23 8.23 0 0 1 0 16.4a11.62 11.62 0 0 0 6.29 1.84"></path>
+                                <path
+                                    d="M6.29 18.25c7.55 0 11.67-6.25 11.67-11.67v-.53c.8-.59 1.49-1.3 2.04-2.13-.75.33-1.54.55-2.36.65a4.12 4.12 0 0 0 1.8-2.27c-.8.48-1.68.81-2.6 1a4.1 4.1 0 0 0-7 3.74 11.65 11.65 0 0 1-8.45-4.3 4.1 4.1 0 0 0 1.27 5.49C2.01 8.2 1.37 8.03.8 7.7v.05a4.1 4.1 0 0 0 3.3 4.03 4.1 4.1 0 0 1-1.86.07 4.1 4.1 0 0 0 3.83 2.85A8.23 8.23 0 0 1 0 16.4a11.62 11.62 0 0 0 6.29 1.84"
+                                ></path>
                             </svg>
                         </a>
                     </div>
@@ -79,7 +85,7 @@
                         <div class="flex items-center justify-between">
                             <a href="/" class="-m-1.5 p-1.5">
                                 <span class="sr-only">Nepali Date Picker</span>
-                                <img class="h-10" src="../assets/images/logo.svg" alt="Logo">
+                                <img class="h-10" src="../assets/images/logo.svg" alt="Logo"/>
                             </a>
                             <button @click="mobileMenu = false" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-400">
                                 <span class="sr-only">Close menu</span>
@@ -101,29 +107,183 @@
                 </div>
             </div>
 
-            <main class="landing__main flex items-center mx-auto max-w-7xl px-6 lg:px-8">
-                <div class="relative py-20 lg:py-40">
-                    <div class="">
-                    </div>
+            <div class="mx-auto max-w-7xl px-6 lg:px-8 pt-8">
+                <h1 class="text-white text-3xl">Documentation</h1>
+            </div>
 
-                    <div class="absolute inset-x-0 top-[calc(100%-20rem)] -z-10 transform-gpu overflow-hidden blur-3xl opacity-50 sm:top-[calc(100%-40rem)]">
-                        <svg class="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]" viewBox="0 0 1155 678">
-                            <path fill="url(#ee0717bf-3e43-49df-b1bd-de36422ed3d3)" fill-opacity=".2" d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"/>
-                            <defs>
-                                <linearGradient id="ee0717bf-3e43-49df-b1bd-de36422ed3d3" x1="1155.49" x2="-78.208" y1=".177" y2="474.645" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#9089FC"></stop>
-                                    <stop offset="1" stop-color="#FF80B5"></stop>
-                                </linearGradient>
-                            </defs>
-                        </svg>
+            <div class="relative mx-auto max-w-7xl px-6 lg:px-8 py-6 flex w-full flex-auto justify-center sm:px-2">
+                <div class="hidden lg:relative lg:block lg:flex-none">
+                    <div class="absolute bottom-0 right-0 top-16 h-12 w-px bg-gradient-to-t from-slate-800 block"></div>
+                    <div class="absolute bottom-0 right-0 top-28 w-px bg-slate-800 block"></div>
+                    <div class="sticky top-16 -ml-0.5 h-[calc(100vh-4.75rem)] w-64 overflow-y-auto overflow-x-hidden py-16 pl-0.5 pr-8 xl:w-72 xl:pr-16">
+                        <nav class="text-base lg:text-sm left-aside">
+                            <ul role="list" class="space-y-9">
+                                <li>
+                                    <h2 class="font-display font-medium text-slate-900 dark:text-white">Introduction</h2>
+                                    <ul role="list" class="left-aside__inner_list">
+                                        <li class="relative">
+                                            <a class="inner_list__link_active" href="#introduction">Nepali Date Picker</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <h2 class="font-display font-medium text-slate-900 dark:text-white">Getting Started</h2>
+                                    <ul role="list" class="left-aside__inner_list">
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#installation">Installation</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Usage</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <h2 class="font-display font-medium text-slate-900 dark:text-white">Examples</h2>
+                                    <ul role="list" class="left-aside__inner_list">
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Basic</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">minDate and maxDate</a>
+                                        </li>
+
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Disabling Dates</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <h2 class="font-display font-medium text-slate-900 dark:text-white">NepaliDatePicker Instance</h2>
+                                    <ul role="list" class="left-aside__inner_list">
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Retrieve Instance</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Properties</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Methods</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Useful Static Methods</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <h2 class="font-display font-medium text-slate-900 dark:text-white">Config Options</h2>
+                                    <ul role="list" class="left-aside__inner_list">
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Format</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Close On Date Select</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Disable After Today</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Disable Before Today</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Disable Today</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Mark Holidays</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Holidays</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Indicate Current Date</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Set Current Date</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <h2 class="font-display font-medium text-slate-900 dark:text-white">Themes</h2>
+                                    <ul role="list" class="left-aside__inner_list">
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Light</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Dark</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Material Deep Ocean</a>
+                                        </li>
+                                        <li class="relative">
+                                            <a class="inner_list__link" href="#">Material Pale Night</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
-            </main>
+
+                <div class="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none space-y-12">
+                    <article>
+                        <header class="mb-9 space-y-2">
+                            <p class="font-display text-sm font-medium text-sky-500">Introduction</p>
+                            <h1 class="font-display text-3xl tracking-tight text-slate-900 dark:text-white" id="introduction">Nepali Date Picker</h1>
+                        </header>
+                        <div
+                            class="prose prose-slate max-w-none dark:prose-invert dark:text-slate-400 prose-headings:scroll-mt-28 prose-headings:font-display prose-headings:font-normal lg:prose-headings:scroll-mt-[8.5rem] prose-lead:text-slate-500 dark:prose-lead:text-slate-400 prose-a:font-semibold dark:prose-a:text-sky-400 prose-a:no-underline prose-a:shadow-[inset_0_-2px_0_0_var(--tw-prose-background,#fff),inset_0_calc(-1*(var(--tw-prose-underline-size,4px)+2px))_0_0_var(--tw-prose-underline,theme(colors.sky.300))] hover:prose-a:[--tw-prose-underline-size:6px] dark:[--tw-prose-background:theme(colors.slate.900)] dark:prose-a:shadow-[inset_0_calc(-1*var(--tw-prose-underline-size,2px))_0_0_var(--tw-prose-underline,theme(colors.sky.800))] dark:hover:prose-a:[--tw-prose-underline-size:6px] prose-pre:rounded-xl prose-pre:bg-slate-900 prose-pre:shadow-lg dark:prose-pre:bg-slate-800/60 dark:prose-pre:shadow-none dark:prose-pre:ring-1 dark:prose-pre:ring-slate-300/10 dark:prose-hr:border-slate-800"
+                        >
+                            <p class="not-prose text-2xl bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text font-display text-transparent">Lightweight, Powerful JavaScript Nepali Date Picker with no dependencies.</p>
+                            <p>Meet our user-friendly Nepali Date Picker, tailor-made for Nepal's date format. It's easy to use, doesn't rely on other tools, and makes handling Nepali dates in your web apps a breeze. No more date headaches – just simple and precise Nepali date selection you can count on.</p>
+                            <hr/>
+                        </div>
+                    </article>
+
+                    <article>
+                        <header class="mb-9 space-y-2">
+                            <p class="font-display text-sm font-medium text-sky-500">Getting Started</p>
+                            <h2 class="font-display text-2xl tracking-tight text-slate-900 dark:text-white" id="installation">Installation</h2>
+                        </header>
+                        <div
+                            class="prose prose-slate max-w-none dark:prose-invert dark:text-slate-400 prose-headings:scroll-mt-28 prose-headings:font-display prose-headings:font-normal lg:prose-headings:scroll-mt-[8.5rem] prose-lead:text-slate-500 dark:prose-lead:text-slate-400 prose-a:font-semibold dark:prose-a:text-sky-400 prose-a:no-underline prose-a:shadow-[inset_0_-2px_0_0_var(--tw-prose-background,#fff),inset_0_calc(-1*(var(--tw-prose-underline-size,4px)+2px))_0_0_var(--tw-prose-underline,theme(colors.sky.300))] hover:prose-a:[--tw-prose-underline-size:6px] dark:[--tw-prose-background:theme(colors.slate.900)] dark:prose-a:shadow-[inset_0_calc(-1*var(--tw-prose-underline-size,2px))_0_0_var(--tw-prose-underline,theme(colors.sky.800))] dark:hover:prose-a:[--tw-prose-underline-size:6px] prose-pre:rounded-xl prose-pre:bg-slate-900 prose-pre:shadow-lg dark:prose-pre:bg-slate-800/60 dark:prose-pre:shadow-none dark:prose-pre:ring-1 dark:prose-pre:ring-slate-300/10 dark:prose-hr:border-slate-800"
+                        >
+                            <h3>Download the package</h3>
+                            <p>
+                                Begin by downloading the Nepali Date Picker package to your local machine. You can find the package on our
+                                <a href="https://github.com/anuzpandey/nepali-date-picker" target="_blank">github repository</a>
+                            </p>
+                            <h3>Include CSS and JavaScript Files</h3>
+                            <p>In your project directory, locate the downloaded package. You will find CSS and JavaScript files.</p>
+                            <p>Copy the CSS file and include it in the
+                                <code class="not-prose">&lt;head&gt;</code>
+                                section of your HTML file:
+                            </p>
+                            <pre><code>&lt;link rel="stylesheet" href="../css/nepali-date-picker.min.css"&gt;</code></pre>
+                            <p>Next, include the JavaScript file at the end of your HTML body:</p>
+                            <pre><code>&lt;link rel="stylesheet" href="../js/nepali-date-picker.min.js"&gt;</code></pre>
+                            <h3>Initialization</h3>
+                            <p>Now, you're ready to initialize the Nepali Date Picker in your JavaScript code.</p>
+                            <pre><code>new NepaliDatePicker({
+    format: 'YYYY-MM-DD',
+})</code></pre>
+                            <h3>CDN Link</h3>
+                            <p>To use the Nepali Date Picker via a Content Delivery Network (CDN), you don't need to download any files. Simply include the following CDN links in your HTML file:</p>
+                            <pre><code>&lt;!-- Include the CSS file from the CDN --&gt;
+&lt;link rel="stylesheet" href="https://nepali-date-picker.vercel.app/css/nepali-date-picker.min.css"&gt;
+
+&lt;!-- Include the JavaScript file from the CDN --&gt;
+&lt;script src="https://nepali-date-picker.vercel.app/js/nepali-date-picker.min.js"&gt;&lt;/script&gt;</code></pre>
+                        </div>
+                    </article>
+                </div>
+            </div>
 
             <footer class="mx-auto max-w-7xl px-6 lg:px-8 w-full">
                 <div class="mx-auto flex flex-col md:flex-row justify-between border-t border-t-gray-50/10 gap-y-2 text-sm md:text-base text-white py-8">
-                    <div>Nepali Date Picker &copy;
-                        <script>document.write(new Date().getFullYear().toString())</script>
+                    <div>
+                        Nepali Date Picker &copy;
+                        <script>
+                            document.write(new Date().getFullYear().toString())
+                        </script>
                         . All rights reserved.
                     </div>
 
