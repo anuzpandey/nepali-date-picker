@@ -38,14 +38,16 @@ $('a[href*="#"]')
             location.hostname == this.hostname
         ) {
             // Figure out element to scroll to
-            var target = $(this.hash)
+            let target = $(this.hash)
             target = target.length ? target : $('[name=' + this.hash.slice(1) + ']')
             // Does a scroll target exist?
             if (target.length) {
                 // Only prevent default if animation is actually gonna happen
                 event.preventDefault()
+
+                var navHeight = 150
                 $('html, body').animate({
-                    scrollTop: target.offset().top
+                    scrollTop: target.offset().top - navHeight
                 }, 1000, function () {
                     // Callback after animation
                     // Must change focus!
