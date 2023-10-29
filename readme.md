@@ -1,4 +1,7 @@
-## INSTALLATION
+### Nepali Date Picker
+![branding-image.png](public%2Fbranding-image.png)
+
+### INSTALLATION
 
 - Add nepali-date-picker.min.js
 - Add nepali-date-picker.min.css
