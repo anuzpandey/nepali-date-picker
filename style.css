@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+  display: none;
+}
+
+.landing__main {
+  min-height: calc(100vh - 180px);
+}
+
+@media (max-width: 768px) {
+  .landing__main {
+    min-height: calc(100vh - 206px);
+  }
+}
