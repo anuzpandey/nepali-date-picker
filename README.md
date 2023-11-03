@@ -1,29 +1,45 @@
-### Nepali Date Picker
-![branding-image.png](dist%2Fimg%2Fbranding-image.png)
+# Nepali Date Picker
+Lightweight, Powerful JavaScript Nepali Date Picker with no dependencies.
 
-### INSTALLATION
+![branding-image.png](public%2Fimg%2Fbranding-image.png)
 
-- Add nepali-date-picker.min.js
-- Add nepali-date-picker.min.css
+## INSTALLATION
 
-### USAGE
+### 1. Download the latest release
+[Download](https://github.com/anuzpandey/nepali-date-picker/releases/latest) and extract the zip file and copy the files from `dist` folder to your project.
+
+### 2. Use a standalone build
+```html
+<!-- Add to the end of body section -->
+<script src="dist/nepali-date-picker.bundle.js"></script>
+```
+#### OR
+
+### 3. Use separate files (JS and CSS)
 ```html
 <!-- Add to the head section -->
-<link rel="stylesheet" href="./css/nepali-date-picker.min.css">
-
-<!-- Add data-nepali-date-picker="unique_value" attribute to input field -->
-<input type="text" readonly data-nepali-date-picker="date_of_birth" placeholder="YYYY-MM-DD">
+<link rel="stylesheet" href="dist/nepali-date-picker.min.css">
 
 <!-- Add to the end of body section -->
-<script src="js/nepali-date-picker.min.js"></script>
-
-<script>
-    // Initialize Nepali Date Picker
-    new NepaliDatePicker()
-</script>
+<script src="dist/nepali-date-picker.min.js"></script>
 ```
 
+---
+
+### USAGE
+```javascript
+// Initialize Nepali Date Picker
+new NepaliDatePicker('.date-picker')
+// --- OR ---
+new NepaliDatePicker('#date-of-birth')
+// --- OR ---
+new NepaliDatePicker('selector', config) // See Config Options below
+```
+
+---
+
 #### Config Options
+
 ```javascript
 let config = {
     format: 'YYYY-MM-DD',           // 'YYYY-MM-DD', 'YYYY/MM/DD', 'YYYY.MM.DD', 'DD-MM-YYYY', 'DD/MM/YYYY', 'DD.MM.YYYY'  
@@ -47,16 +63,12 @@ let config = {
 
 ```javascript
 // To Convert English Date to Nepali Date
-
 let NepaliDatePicker = new NepaliDatePicker();
-
-NepaliDatePicker.convertToNepaliDate(2053, 1, 10)
-
+NepaliDatePicker.convertToNepaliDate(1996, 4, 22)
 // Result: {year: 2053, month: 1, day: 10}
 ```
 
 #### Features
-
 - [x] ~~Proper UI for Date Picker~~
 - [x] ~~Convert English Date to Nepali Date~~
 - [ ] Convert Nepali Date to English Date
@@ -67,8 +79,9 @@ NepaliDatePicker.convertToNepaliDate(2053, 1, 10)
 - [ ] Add Configurations to Date Picker
     - [x] ~~Close/Hide Date Picker on Date Select~~
     - [ ] Disable features on
-        - [ ] Today's Date
-        - [ ] Before Today's Date
+        - [x] Today's Date
+        - [x] Before Today's Date
+        - [x] Before After Today's Date
         - [ ] Specific Dates
         - [ ] Specific Days
         - [ ] Specific Months
@@ -97,7 +110,7 @@ NepaliDatePicker.convertToNepaliDate(2053, 1, 10)
     - [x] ~~Language Support (np/en)~~
         - [x] ~~English~~
         - [x] ~~Nepali~~
-    - [x] ~~Date Picker Theme~~
+    - [ ] Date Picker Theme
         - [x] ~~Light~~
         - [x] ~~Dark~~
     - [ ] Min Date
