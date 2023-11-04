@@ -1,21 +1,38 @@
 # Nepali Date Picker
+
 Lightweight, Powerful JavaScript Nepali Date Picker with no dependencies.
 
 ![branding-image.png](public%2Fimg%2Fbranding-image.png)
 
 ## INSTALLATION
 
-### 1. Download the latest release
-[Download](https://github.com/anuzpandey/nepali-date-picker/releases/latest) and extract the zip file and copy the files from `dist` folder to your project.
+### 1. Install via NPM
 
-### 2. Use a standalone build
-```html
-<!-- Add to the end of body section -->
-<script src="dist/nepali-date-picker.bundle.js"></script>
+```bash
+npm install @anuz-pandey/nepali-date-picker
+# Oe Yarn
+yarn add @anuz-pandey/nepali-date-picker
+# Or Pnpm
+pnpm add @anuz-pandey/nepali-date-picker
+# Or Bun
+bun add @anuz-pandey/nepali-date-picker
 ```
-#### OR
+
+### 2. Installation for Non-Module Environments
+
+- 2.1. Download the latest release
+  [Download](https://github.com/anuzpandey/nepali-date-picker/releases/latest) and extract the zip file and copy the files from `dist` folder to your project.
+
+- 2.2. Use a standalone build
+    ```html
+    <!-- Add to the end of body section -->
+    <script src="dist/nepali-date-picker.bundle.js"></script>
+    ```
+
+##### OR
 
 ### 3. Use separate files (JS and CSS)
+
 ```html
 <!-- Add to the head section -->
 <link rel="stylesheet" href="dist/nepali-date-picker.min.css">
@@ -24,9 +41,31 @@ Lightweight, Powerful JavaScript Nepali Date Picker with no dependencies.
 <script src="dist/nepali-date-picker.min.js"></script>
 ```
 
+### 4. CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@anuz-pandey/nepali-date-picker/dist/nepali-date-picker.bundle.min.js"></script>
+
+<!-- OR -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@anuz-pandey/nepali-date-picker/dist/nepali-date-picker.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@anuz-pandey/nepali-date-picker/dist/nepali-date-picker.min.js"></script>
+```
 ---
 
 ### USAGE
+
+If you’re using a bundler, e.g. webpack, you’ll need to import NepaliDatePicker and the CSS file.
+
+```javascript
+// esp. modules are recommended, if available, especially for typescript
+import NepaliDatePicker from '@anuz-pandey/nepali-date-picker'
+
+// CommonJS
+const NepaliDatePicker = require('@anuz-pandey/nepali-date-picker')
+````
+
+All the following are valid ways to create flatpickr instance.
+
 ```javascript
 // Initialize Nepali Date Picker
 new NepaliDatePicker('.date-picker')
@@ -69,6 +108,7 @@ NepaliDatePicker.convertToNepaliDate(1996, 4, 22)
 ```
 
 #### Features
+
 - [x] ~~Proper UI for Date Picker~~
 - [x] ~~Convert English Date to Nepali Date~~
 - [ ] Convert Nepali Date to English Date
