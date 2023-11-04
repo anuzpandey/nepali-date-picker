@@ -1,0 +1,24 @@
+{
+  "name": "nepali-date-picker",
+  "version": "2.0.0",
+  "description": "Lightweight, Powerful JavaScript Nepali Date Picker with no dependencies.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anuzpandey/nepali-date-picker.git"
+  },
+  "keywords": [
+    "nepali-date-picker",
+    "date-picker",
+    "nepal"
+  ],
+  "author": "Anuz Pandey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anuzpandey/nepali-date-picker/issues"
+  },
+  "homepage": "https://github.com/anuzpandey/nepali-date-picker#readme"
+}
