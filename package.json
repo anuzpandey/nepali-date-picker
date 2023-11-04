@@ -1,6 +1,6 @@
 {
   "name": "@anuz-pandey/nepali-date-picker",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Lightweight, Powerful JavaScript Nepali Date Picker with no dependencies.",
   "main": "dist/nepali-date-picker.bundle.js",
   "module": "dist/nepali-date-picker.bundle.js",
