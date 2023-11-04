@@ -1,4 +1,11 @@
 # Nepali Date Picker
+[![NPM Version][npm-image]][npm-url]
+[![Download Count][download-count]][npm-url]
+
+[npm-url]: https://npmjs.org/package/@anuz-pandey/nepali-date-picker
+[npm-image]: https://img.shields.io/npm/v/@anuz-pandey/nepali-date-picker.svg?style=flat-square
+[download-count]: https://img.shields.io/npm/dt/@anuz-pandey/nepali-date-picker.svg?style=flat-square
+
 
 Lightweight, Powerful JavaScript Nepali Date Picker with no dependencies.
 
