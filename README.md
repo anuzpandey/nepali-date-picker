@@ -102,6 +102,7 @@ let config = {
     locale: 'np',                   // 'np' for nepali, 'en' for english
     theme: 'flat',                  // bordered | soft | flat
     darkMode: false,                // boolean: true | false
+    inline: false,                  // boolean: true | false
 }
 ````
 
@@ -125,6 +126,7 @@ NepaliDatePicker.convertToNepaliDate(1996, 4, 22)
 - [x] Remove jQuery Dependency
 - [ ] Support Time Select
 - [ ] Calculate Age on Date
+- [x] Inline Calendar
 - [ ] Add Configurations to Date Picker
     - [x] Close/Hide Date Picker on Date Select
     - [ ] Disable features on
