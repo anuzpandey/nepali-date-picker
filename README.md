@@ -116,15 +116,17 @@ NepaliDatePicker.convertToNepaliDate(1996, 4, 22)
 
 #### Features
 
-- [x] ~~Proper UI for Date Picker~~
-- [x] ~~Convert English Date to Nepali Date~~
+
+
+- [x] Proper UI for Date Picker
+- [x] Convert English Date to Nepali Date
 - [ ] Convert Nepali Date to English Date
-- [x] ~~Add Date Picker to Multiple Input Fields~~
-- [x] ~~Remove jQuery Dependency~~
+- [x] Add Date Picker to Multiple Input Fields
+- [x] Remove jQuery Dependency
 - [ ] Support Time Select
 - [ ] Calculate Age on Date
 - [ ] Add Configurations to Date Picker
-    - [x] ~~Close/Hide Date Picker on Date Select~~
+    - [x] Close/Hide Date Picker on Date Select
     - [ ] Disable features on
         - [x] Today's Date
         - [x] Before Today's Date
@@ -134,31 +136,31 @@ NepaliDatePicker.convertToNepaliDate(1996, 4, 22)
         - [ ] Specific Months
         - [ ] Specific Years
     - [ ] Mark Holidays on
-        - [x] ~~Specific Days~~
+        - [x] Specific Days
         - [ ] Specific Dates
         - [ ] Date Ranges
-    - [x] ~~Set Current Date Indicator~~
-    - [x] ~~Set Current Date on Input Value~~
-    - [x] ~~Set Date Format~~
-        - [x] ~~YYYY-MM-DD~~
-        - [x] ~~YYYY/MM/DD~~
-        - [x] ~~YYYY.MM.DD~~
-        - [x] ~~DD-MM-YYYY~~
-        - [x] ~~DD/MM/YYYY~~
-        - [x] ~~DD.MM.YYYY~~
-    - [x] ~~Picker Position~~
-        - [x] ~~Left~~
-        - [x] ~~Center~~
-        - [x] ~~Right~~
-    - [x] ~~Date Picker Days Format~~
-        - [x] ~~Full Name (ddd) [Eg. Sunday, आइतबार]~~
-        - [x] ~~Short Name (dd) [Eg. Sun, आइत]~~
-        - [x] ~~Very Short Name (d) [Eg. S, आ]~~
-    - [x] ~~Language Support (np/en)~~
-        - [x] ~~English~~
-        - [x] ~~Nepali~~
+    - [x] Set Current Date Indicator
+    - [x] Set Current Date on Input Value
+    - [x] Set Date Format
+        - [x] YYYY-MM-DD
+        - [x] YYYY/MM/DD
+        - [x] YYYY.MM.DD
+        - [x] DD-MM-YYYY
+        - [x] DD/MM/YYYY
+        - [x] DD.MM.YYYY
+    - [x] Picker Position
+        - [x] Left
+        - [x] Center
+        - [x] Right
+    - [x] Date Picker Days Format
+        - [x] Full Name (ddd) [Eg. Sunday, आइतबार]
+        - [x] Short Name (dd) [Eg. Sun, आइत]
+        - [x] Very Short Name (d) [Eg. S, आ]
+    - [x] Language Support (np/en)
+        - [x] English
+        - [x] Nepali
     - [ ] Date Picker Theme
-        - [x] ~~Light~~
-        - [x] ~~Dark~~
+        - [x] Light
+        - [x] Dark
     - [ ] Min Date
     - [ ] Max Date
