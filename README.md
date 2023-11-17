@@ -1,9 +1,12 @@
 # Nepali Date Picker
+
 [![NPM Version][npm-image]][npm-url]
 [![Download Count][download-count]][npm-url]
 
 [npm-url]: https://npmjs.org/package/@anuz-pandey/nepali-date-picker
+
 [npm-image]: https://img.shields.io/npm/v/@anuz-pandey/nepali-date-picker.svg?style=flat-square
+
 [download-count]: https://img.shields.io/npm/dt/@anuz-pandey/nepali-date-picker.svg?style=flat-square
 
 
@@ -51,12 +54,14 @@ bun add @anuz-pandey/nepali-date-picker
 ### 4. CDN
 
 ```html
+
 <script src="https://cdn.jsdelivr.net/npm/@anuz-pandey/nepali-date-picker/dist/nepali-date-picker.bundle.min.js"></script>
 
 <!-- OR -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@anuz-pandey/nepali-date-picker/dist/nepali-date-picker.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@anuz-pandey/nepali-date-picker/dist/nepali-date-picker.min.js"></script>
 ```
+
 ---
 
 ### USAGE
@@ -117,52 +122,53 @@ NepaliDatePicker.convertToNepaliDate(1996, 4, 22)
 
 #### Features
 
-
-
-- [x] Proper UI for Date Picker
-- [x] Convert English Date to Nepali Date
-- [ ] Convert Nepali Date to English Date
-- [x] Add Date Picker to Multiple Input Fields
-- [x] Remove jQuery Dependency
-- [ ] Support Time Select
-- [ ] Calculate Age on Date
-- [x] Inline Calendar
-- [ ] Add Configurations to Date Picker
-    - [x] Close/Hide Date Picker on Date Select
-    - [ ] Disable features on
-        - [x] Today's Date
-        - [x] Before Today's Date
-        - [x] Before After Today's Date
-        - [ ] Specific Dates
-        - [ ] Specific Days
-        - [ ] Specific Months
-        - [ ] Specific Years
-    - [ ] Mark Holidays on
-        - [x] Specific Days
-        - [ ] Specific Dates
-        - [ ] Date Ranges
-    - [x] Set Current Date Indicator
-    - [x] Set Current Date on Input Value
-    - [x] Set Date Format
-        - [x] YYYY-MM-DD
-        - [x] YYYY/MM/DD
-        - [x] YYYY.MM.DD
-        - [x] DD-MM-YYYY
-        - [x] DD/MM/YYYY
-        - [x] DD.MM.YYYY
-    - [x] Picker Position
-        - [x] Left
-        - [x] Center
-        - [x] Right
-    - [x] Date Picker Days Format
-        - [x] Full Name (ddd) [Eg. Sunday, आइतबार]
-        - [x] Short Name (dd) [Eg. Sun, आइत]
-        - [x] Very Short Name (d) [Eg. S, आ]
-    - [x] Language Support (np/en)
-        - [x] English
-        - [x] Nepali
-    - [ ] Date Picker Theme
-        - [x] Light
-        - [x] Dark
-    - [ ] Min Date
-    - [ ] Max Date
+| Feature                                                 | Status       |
+|---------------------------------------------------------|--------------|
+| Proper UI for Date Picker                               | ✅ Done       |
+| Convert English Date to Nepali Date                     | ✅ Done       |
+| Convert Nepali Date to English Date                     | ⬜ Not Done   |
+| Add Date Picker to Multiple Input Fields                | ✅ Done       |
+| Remove jQuery Dependency                                | ✅ Done       |
+| Support Time Select                                     | ⬜ Not Done   |
+| Calculate Age on Date                                   | ⬜ Not Done   |
+| Inline Calendar                                         | ✅ Done       |
+| Add Configurations to Date Picker                       | ⬜ Not Done   |
+| Close/Hide Date Picker on Date Select                   | ✅ Done       |
+| ------------------------------------------------------- | ------------ |
+| Disable on Today's Date                                 | ✅ Done       |
+| Disable on Before Today's Date                          | ✅ Done       |
+| Disable on Before After Today's Date                    | ✅ Done       |
+| Disable on Specific Dates                               | ⬜ Not Done   |
+| Disable on Specific Days                                | ⬜ Not Done   |
+| Disable on Specific Months                              | ⬜ Not Done   |
+| Disable on Specific Years                               | ⬜ Not Done   |
+| ------------------------------------------------------- | ------------ |
+| Mark Holidays on Specific Days                          | ✅ Done       |
+| Mark Holidays on Specific Dates                         | ⬜ Not Done   |
+| Mark Holidays on Date Ranges                            | ⬜ Not Done   |
+| ------------------------------------------------------- | ------------ |
+| Set Current Date Indicator                              | ✅ Done       |
+| Set Current Date on Input Value                         | ✅ Done       |
+| ------------------------------------------------------- | ------------ |
+| Set Date Format - YYYY-MM-DD                            | ✅ Done       |
+| Set Date Format - YYYY/MM/DD                            | ✅ Done       |
+| Set Date Format - YYYY.MM.DD                            | ✅ Done       |
+| Set Date Format - DD-MM-YYYY                            | ✅ Done       |
+| Set Date Format - DD/MM/YYYY                            | ✅ Done       |
+| Set Date Format - DD.MM.YYYY                            | ✅ Done       |
+| ------------------------------------------------------- | ------------ |
+| Picker Position - Left                                  | ✅ Done       |
+| Picker Position - Center                                | ✅ Done       |
+| Picker Position - Right                                 | ✅ Done       |
+| ------------------------------------------------------- | ------------ |
+| Days Format - Full Name (ddd) [Eg. Sunday, आइतबार]      | ✅ Done       |
+| Days Format - Short Name (dd) [Eg. Sun, आइत]            | ✅ Done       |
+| Days Format - Very Short Name (d) [Eg. S, आ]            | ✅ Done       |
+| ------------------------------------------------------- | ------------ |
+| English Language Support                                | ✅ Done       |
+| Nepali Language Support                                 | ✅ Done       |
+| ------------------------------------------------------- | ------------ |
+| Dark Theme                                              | ✅ Done       |
+| ------------------------------------------------------- | ------------ |
+| Min Date                                                | ⬜ Not Done   |
+| Max Date                                                | ⬜ Not Done   |
