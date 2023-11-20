@@ -20,7 +20,7 @@ Lightweight, Powerful JavaScript Nepali Date Picker with no dependencies.
 
 ```bash
 npm install @anuz-pandey/nepali-date-picker
-# Oe Yarn
+# Or Yarn
 yarn add @anuz-pandey/nepali-date-picker
 # Or Pnpm
 pnpm add @anuz-pandey/nepali-date-picker
