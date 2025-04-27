@@ -93,21 +93,23 @@ new NepaliDatePicker('selector', config) // See Config Options below
 
 ```javascript
 let config = {
-    format: 'YYYY-MM-DD',           // 'YYYY-MM-DD', 'YYYY/MM/DD', 'YYYY.MM.DD', 'DD-MM-YYYY', 'DD/MM/YYYY', 'DD.MM.YYYY'  
-    disableAfterToday: false,       // boolean: true | false
-    disableBeforeToday: false,      // boolean: true | false
-    disableToday: false,            // boolean: true | false
-    closeOnDateSelect: true,        // boolean: true | false
-    markHolidays: true,             // boolean: true | false
-    holidays: ['Saturday'],         // ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-    indicateCurrentDate: true,      // boolean: true | false
-    setCurrentDate: false,          // boolean: true | false
-    position: 'left',               // 'left', 'right' or 'center'
-    daysFormat: 'dd',               // 'ddd' for full day name, 'dd' for short day name, 'd' for 1 letter day name
-    locale: 'np',                   // 'np' for nepali, 'en' for english
-    theme: 'flat',                  // bordered | soft | flat
-    darkMode: false,                // boolean: true | false
-    inline: false,                  // boolean: true | false
+    format: 'YYYY-MM-DD',                 // 'YYYY-MM-DD', 'YYYY/MM/DD', 'YYYY.MM.DD', 'DD-MM-YYYY', 'DD/MM/YYYY', 'DD.MM.YYYY'  
+    disableAfterToday: false,             // boolean: true | false
+    disableBeforeToday: false,            // boolean: true | false
+    disableToday: false,                  // boolean: true | false
+    disableDates: ['2081-01-02'],         // Array of dates (string)
+    disabledDatesFormat: 'YYYY-MM-DD'     // string: required if different date format on disabledDates except(YYYY-MM-DD)
+    closeOnDateSelect: true,              // boolean: true | false
+    markHolidays: true,                   // boolean: true | false
+    holidays: ['Saturday'],               // ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    indicateCurrentDate: true,            // boolean: true | false
+    setCurrentDate: false,                // boolean: true | false
+    position: 'left',                     // 'left', 'right' or 'center'
+    daysFormat: 'dd',                     // 'ddd' for full day name, 'dd' for short day name, 'd' for 1 letter day name
+    locale: 'np',                         // 'np' for nepali, 'en' for english
+    theme: 'flat',                        // bordered | soft | flat
+    darkMode: false,                      // boolean: true | false
+    inline: false,                        // boolean: true | false
 }
 ````
 
@@ -138,7 +140,7 @@ NepaliDatePicker.convertToNepaliDate(1996, 4, 22)
 | Disable on Today's Date                                 | ✅ Done       |
 | Disable on Before Today's Date                          | ✅ Done       |
 | Disable on Before After Today's Date                    | ✅ Done       |
-| Disable on Specific Dates                               | ⬜ Not Done   |
+| Disable on Specific Dates                               | ✅ Done       |
 | Disable on Specific Days                                | ⬜ Not Done   |
 | Disable on Specific Months                              | ⬜ Not Done   |
 | Disable on Specific Years                               | ⬜ Not Done   |
