@@ -76,7 +76,7 @@ import NepaliDatePicker from '@anuz-pandey/nepali-date-picker'
 const NepaliDatePicker = require('@anuz-pandey/nepali-date-picker')
 ````
 
-All the following are valid ways to create flatpickr instance.
+All the following are valid ways to create date picker instance.
 
 ```javascript
 // Initialize Nepali Date Picker
@@ -87,13 +87,33 @@ new NepaliDatePicker('#date-of-birth')
 new NepaliDatePicker('selector', config) // See Config Options below
 ```
 
+#### HTML Structure Requirement
+
+**Important:** The input field must be wrapped in a container with `position: relative` for the date picker to position correctly:
+
+```html
+<!-- ✅ Correct -->
+<div style="position: relative;">
+  <input type="text" id="date-picker">
+</div>
+
+<!-- Or with CSS class -->
+<div class="relative">
+  <input type="text" id="date-picker">
+</div>
+```
+
+Without the relative positioning, the calendar popup will not align correctly with the input field.
+
 ---
 
 #### Config Options
 
 ```javascript
 let config = {
-    format: 'YYYY-MM-DD',                 // 'YYYY-MM-DD', 'YYYY/MM/DD', 'YYYY.MM.DD', 'DD-MM-YYYY', 'DD/MM/YYYY', 'DD.MM.YYYY'  
+    format: 'YYYY-MM-DD',                 // 'YYYY-MM-DD', 'YYYY/MM/DD', 'YYYY.MM.DD', 'DD-MM-YYYY', 'DD/MM/YYYY', 'DD.MM.YYYY'
+    mode: 'basic',                        // 'basic' for single selection, 'multiple' for multiple selection
+    selectedDatesFormat: 'array',         // 'array', 'comma', 'json', or function (only for mode: 'multiple')
     disableAfterToday: false,             // boolean: true | false
     disableBeforeToday: false,            // boolean: true | false
     disableToday: false,                  // boolean: true | false
@@ -110,8 +130,121 @@ let config = {
     theme: 'flat',                        // bordered | soft | flat
     darkMode: false,                      // boolean: true | false
     inline: false,                        // boolean: true | false
+    minDate: null,                        // string: minimum selectable date (Nepali date)
+    maxDate: null,                        // string: maximum selectable date (Nepali date)
+    minDateFormat: null,                  // optional: format of minDate if different from main format
+    maxDateFormat: null,                  // optional: format of maxDate if different from main format
 }
 ````
+
+#### Custom Date Formatting with `selectedDatesFormat`
+
+When using `mode: 'multiple'`, you can provide a custom function to format the selected dates however you need:
+
+```javascript
+// Function signature
+selectedDatesFormat: (dates) => {
+    // dates: Array of selected dates in 'YYYY-MM-DD' format
+    // returns: String to display in the input field
+}
+```
+
+**Parameters:**
+- `dates` - Array of selected date strings in normalized `YYYY-MM-DD` format (e.g., `['2082-01-15', '2082-02-20']`)
+
+**Return Value:**
+- String that will be displayed in the input field
+
+**Examples:**
+
+```javascript
+// Example 1: Custom separator
+new NepaliDatePicker('#myPicker', {
+    mode: 'multiple',
+    selectedDatesFormat: (dates) => dates.join(' | ')
+    // Output: "2082-01-15 | 2082-02-20"
+});
+
+// Example 2: Add prefix/suffix
+new NepaliDatePicker('#myPicker', {
+    mode: 'multiple',
+    selectedDatesFormat: (dates) => `Selected ${dates.length} dates: ${dates.join(', ')}`
+    // Output: "Selected 2 dates: 2082-01-15, 2082-02-20"
+});
+
+// Example 3: Custom date formatting
+new NepaliDatePicker('#myPicker', {
+    mode: 'multiple',
+    selectedDatesFormat: (dates) => dates.map(d => {
+        const [year, month, day] = d.split('-');
+        return `${day}/${month}/${year}`;
+    }).join(', ')
+    // Output: "15/01/2082, 20/02/2082"
+});
+
+// Example 4: Preformatted options
+new NepaliDatePicker('#myPicker', {
+    mode: 'multiple',
+    selectedDatesFormat: (dates) => {
+        if (dates.length === 0) return '';
+        if (dates.length === 1) return `1 date selected: ${dates[0]}`;
+        return `${dates.length} dates selected`;
+    }
+    // Output: "2 dates selected" or "1 date selected: 2082-01-15"
+});
+```
+
+#### Min/Max Date Constraints
+
+Restrict date selection to a specific range by setting minimum and maximum dates. All dates are specified in **Nepali calendar (BS - Bikram Sambat)** format.
+
+**Important:** Use Nepali dates (BS), not English dates (AD). For example, use `2082` for Nepali year 2082, not 2025.
+
+```javascript
+// Basic usage - same format as main picker
+new NepaliDatePicker('#picker', {
+    format: 'YYYY-MM-DD',
+    minDate: '2082-01-01',    // Nepali year 2082, month 1, day 1
+    maxDate: '2082-12-30'     // Nepali year 2082, month 12, day 30
+})
+
+// Different format for constraints than main picker
+new NepaliDatePicker('#picker', {
+    format: 'DD-MM-YYYY',
+    minDate: '01-01-2082',           // Using DD-MM-YYYY format
+    minDateFormat: 'DD-MM-YYYY',     // Specify the format
+    maxDate: '30-12-2082',
+    maxDateFormat: 'DD-MM-YYYY'
+})
+```
+
+**Public API Methods:**
+
+```javascript
+const picker = new NepaliDatePicker('#picker', {
+    minDate: '2082-01-01',
+    maxDate: '2082-12-30'
+})
+
+// Update constraints dynamically
+picker.setMinDate('2082-02-01')
+picker.setMaxDate('2082-11-30')
+
+// Get current constraints
+const min = picker.getMinDate()  // → '2082-02-01'
+const max = picker.getMaxDate()  // → '2082-11-30'
+
+// Clear constraints
+picker.setMinDate(null)
+picker.setMaxDate(null)
+```
+
+**Use Cases:**
+- Date Range Booking: Only allow booking within available dates
+- Age Verification: Set maximum date to restrict selection (e.g., adults only)
+- Project Timeline: Only select dates within project duration
+- Appointment Scheduling: Only allow dates within operating period
+- Event Registration: Only allow registration before event date
 
 #### English Date to Nepali Date Conversion
 
@@ -136,6 +269,7 @@ NepaliDatePicker.convertToNepaliDate(1996, 4, 22)
 | Inline Calendar                                         | ✅ Done       |
 | Add Configurations to Date Picker                       | ⬜ Not Done   |
 | Close/Hide Date Picker on Date Select                   | ✅ Done       |
+| Multiple Date Selection (mode: 'multiple')              | ✅ Done       |
 | ------------------------------------------------------- | ------------ |
 | Disable on Today's Date                                 | ✅ Done       |
 | Disable on Before Today's Date                          | ✅ Done       |
@@ -172,5 +306,5 @@ NepaliDatePicker.convertToNepaliDate(1996, 4, 22)
 | ------------------------------------------------------- | ------------ |
 | Dark Theme                                              | ✅ Done       |
 | ------------------------------------------------------- | ------------ |
-| Min Date                                                | ⬜ Not Done   |
-| Max Date                                                | ⬜ Not Done   |
+| Min Date                                                | ✅ Done       |
+| Max Date                                                | ✅ Done       |
