@@ -9,6 +9,8 @@
 
 Lightweight, powerful JavaScript Nepali date picker with **zero dependencies**.
 
+![branding-image.png](public/img/branding-image.png)
+
 ## ✨ Features
 
 - 🎯 **Single & Multiple Selection** - Basic and multiple date modes
