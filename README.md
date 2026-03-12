@@ -67,14 +67,16 @@ document.getElementById('date-picker').addEventListener('nepali-date-change', (e
 
 ## 📚 Documentation
 
-Full documentation is available in the [GitHub repository](https://github.com/anuzpandey/nepali-date-picker):
+Full documentation is available in the `/docs` folder:
 
-- **Quick Start** - Get started in 5 minutes
-- **Installation** - NPM, CDN, and standalone options
-- **API Reference** - All configuration options and methods
-- **Examples** - Code samples for common use cases
-- **Features** - Complete feature roadmap
-- **Contributing** - How to contribute to the project
+| Document | Purpose |
+|----------|---------|
+| [📖 Quick Start](./docs/QUICK-START.md) | Get started in 5 minutes |
+| [💾 Installation](./docs/INSTALLATION.md) | NPM, CDN, and standalone options |
+| [🔧 API Reference](./docs/API.md) | All configuration options and methods |
+| [📝 Examples](./docs/EXAMPLES.md) | Code samples for common use cases |
+| [🗺️ Features](./docs/FEATURES.md) | Complete feature roadmap |
+| [🤝 Contributing](./CONTRIBUTING.md) | Report bugs and request features |
 
 ## 🎯 Common Use Cases
 
@@ -140,14 +142,13 @@ yarn add @anuz-pandey/nepali-date-picker
 
 ## 🤝 Contributing
 
-We welcome contributions! To contribute:
+We welcome your feedback!
 
 1. **Report bugs** - Open an [issue](https://github.com/anuzpandey/nepali-date-picker/issues)
-2. **Request features** - Describe your idea in an issue
-3. **Submit code** - Fork, create a feature branch, and submit a PR
-4. **Improve docs** - Help us improve documentation
+2. **Request features** - Describe your idea in an [issue](https://github.com/anuzpandey/nepali-date-picker/issues)
+3. **Ask questions** - Use [GitHub Discussions](https://github.com/anuzpandey/nepali-date-picker/discussions)
 
-See the [Contributing Guide](https://github.com/anuzpandey/nepali-date-picker/blob/main/docs/CONTRIBUTING.md) for detailed instructions.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
 
 ## 📄 License
 
