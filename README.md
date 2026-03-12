@@ -308,3 +308,6 @@ NepaliDatePicker.convertToNepaliDate(1996, 4, 22)
 | ------------------------------------------------------- | ------------ |
 | Min Date                                                | ✅ Done       |
 | Max Date                                                | ✅ Done       |
+| Dispatch Native DOM Events (input, change)              | ✅ Done       |
+| Custom Event: nepali-date-change                        | ✅ Done       |
+| Framework Integration (Vue, React, Alpine, Livewire)    | ✅ Done       |
