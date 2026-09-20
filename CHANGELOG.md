@@ -8,6 +8,17 @@ repository at release time, alongside `dist/` and the docs.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.1] - 2026-09-20
+
+### Fixed
+
+- **Corrected the calendar data for BS 2062.** Baishakh 2062 is 31 days, not 30,
+  and Jestha is 31, not 32. Every date in Jestha 2062 — roughly 15 May to 14 June
+  2005 — was reading one day out. Jestha 1, 2062 is AD 2005-05-15.
+
+  The year still totals 365, so no other month or year is affected, and no date
+  outside Jestha 2062 changes. Verified against Hamro Patro.
+
 ## [2.8.0] - 2026-09-20
 
 ### Added
