@@ -1,10 +1,20 @@
 {
   "name": "@anuz-pandey/nepali-date-picker",
-  "version": "2.8.1",
+  "version": "2.9.0",
   "description": "Lightweight, Powerful JavaScript Nepali Date Picker with no dependencies.",
   "main": "dist/nepali-date-picker.bundle.js",
-  "module": "dist/nepali-date-picker.bundle.js",
+  "module": "dist/nepali-date-picker.mjs",
   "types": "dist/nepali-date-picker.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/nepali-date-picker.d.ts",
+      "import": "./dist/nepali-date-picker.mjs",
+      "require": "./dist/nepali-date-picker.bundle.js",
+      "default": "./dist/nepali-date-picker.bundle.js"
+    },
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
   "files": [
     "dist",
     "CHANGELOG.md"

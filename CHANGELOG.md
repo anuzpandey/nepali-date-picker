@@ -8,6 +8,25 @@ repository at release time, alongside `dist/` and the docs.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.9.0] - 2026-09-20
+
+### Added
+
+- **A real ES module build.** `dist/nepali-date-picker.mjs`, reachable through
+  the `import` condition of a new `exports` map.
+
+### Fixed
+
+- **`module` no longer points at a file that is not an ES module.** It pointed at
+  the UMD bundle, which contains no `export` statements at all, so every tool
+  reading that field was told the package ships ESM when it did not. Bundlers
+  could not analyse it, and Node's interop invented a bogus named export called
+  `module.exports`.
+
+  `require()` still resolves to the UMD build and is unchanged. Deep imports such
+  as `@anuz-pandey/nepali-date-picker/dist/nepali-date-picker.min.css` keep
+  working — the `exports` map leaves `./dist/*` open on purpose.
+
 ## [2.8.1] - 2026-09-20
 
 ### Fixed
