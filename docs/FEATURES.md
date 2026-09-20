@@ -17,7 +17,7 @@ Current feature status and planned enhancements.
 | Feature | Status | Version |
 |---------|--------|---------|
 | English (AD) to Nepali (BS) conversion | ✅ Done | v1.0 |
-| Nepali (BS) to English (AD) conversion | ⬜ Planned | — |
+| Nepali (BS) to English (AD) conversion | ✅ Done | v2.10 |
 
 ## Selection Modes
 

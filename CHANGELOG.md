@@ -8,6 +8,36 @@ repository at release time, alongside `dist/` and the docs.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.10.0] - 2026-09-21
+
+### Added
+
+- **BS → AD conversion.** `NepaliDatePicker.convertToEnglishDate(bsYear, bsMonth, bsDay)`
+  returns `{ year, month, date }`, completing the pair with `convertToNepaliDate`.
+  It was listed as planned since v1.0.
+
+  ```javascript
+  NepaliDatePicker.convertToEnglishDate(2082, 1, 1);
+  // → { year: 2025, month: 4, date: 14 }
+  ```
+
+  **`bsMonth` is 1-indexed, and so is the `month` it returns** — matching the
+  `YYYY-MM-DD` strings the picker produces, which is where a BS date usually
+  comes from. Note that this is *not* a mirror of `convertToNepaliDate`, whose
+  returned `month` is 0-indexed and stays that way for compatibility. Passing its
+  result straight back needs `+ 1`; see [docs/API.md](docs/API.md#month-indexing).
+
+  Supports BS 2000-09-17 to 2090-12-30 — the same window as `convertToNepaliDate`,
+  seen from the other side. Outside it, or on a day the BS month does not have,
+  it throws a `RangeError`.
+
+  Verified by round-tripping every one of the 32,976 days in that window.
+
+### Fixed
+
+- **`docs/API.md` no longer warns that pre-1944 dates return a wrong answer.**
+  They have thrown a `RangeError` since 2.8.0; the note was left behind.
+
 ## [2.9.0] - 2026-09-20
 
 ### Added

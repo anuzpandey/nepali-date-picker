@@ -131,20 +131,56 @@ NepaliDatePicker.convertToNepaliDate(year, month, day);
 // Example: NepaliDatePicker.convertToNepaliDate(1996, 4, 22)
 // Result: { year: 2053, month: 0, date: 10 }
 
+// Convert a Nepali (BS) date to English (AD)
+NepaliDatePicker.convertToEnglishDate(bsYear, bsMonth, bsDay);
+// Example: NepaliDatePicker.convertToEnglishDate(2082, 1, 1)
+// Result: { year: 2025, month: 4, date: 14 }
+
 // Whether an AD year is a leap year
 NepaliDatePicker.isLeapYear(2024);      // → true
 ```
 
-> **Note on `convertToNepaliDate`:** the AD `month` argument is **1-indexed**
-> (1 = January), but the `month` in the returned object is **0-indexed**
-> (0 = Baishakh), and the day is returned as `date`, not `day`.
+#### Month indexing
 
-Conversion is backed by a calendar table covering BS 2000–2090, so AD dates from
-**1944-01-01 to 2034-04-13** (BS 2090-12-30) are supported. A date past that end
-throws a `RangeError`.
+The two converters do **not** index months the same way. This is the one thing to
+get right when using them:
 
-> **Dates before 1944-01-01 are not supported** and currently return an incorrect
-> result instead of raising an error. Do not rely on them.
+| | `month` argument | `month` in the result |
+|---|---|---|
+| `convertToNepaliDate` | AD, **1-indexed** (1 = January) | BS, **0-indexed** (0 = Baishakh) |
+| `convertToEnglishDate` | BS, **1-indexed** (1 = Baishakh) | AD, **1-indexed** (1 = January) |
+
+`convertToEnglishDate` is 1-indexed on both sides because that is what the picker
+itself produces — the input value, `getSelectedDates()` and every `YYYY-MM-DD`
+string in the library use a 1-indexed month:
+
+```javascript
+// A date the user picked, in the default YYYY-MM-DD format
+const [y, m, d] = '2082-05-04'.split('-').map(Number);
+NepaliDatePicker.convertToEnglishDate(y, m, d);   // → { year: 2025, month: 8, date: 20 }
+```
+
+The 0-indexed return of `convertToNepaliDate` is kept for backwards
+compatibility. Feeding it straight back needs `+ 1`:
+
+```javascript
+const bs = NepaliDatePicker.convertToNepaliDate(2025, 4, 14);
+NepaliDatePicker.convertToEnglishDate(bs.year, bs.month + 1, bs.date);
+// → { year: 2025, month: 4, date: 14 }
+```
+
+Both converters also return the day as `date`, not `day`.
+
+#### Supported range
+
+Conversion is backed by a calendar table covering BS 2000–2090, but the AD side
+counts from a 1944 anchor, so the supported window is:
+
+**AD 1944-01-01 – 2034-04-13**, equivalently **BS 2000-09-17 – 2090-12-30**.
+
+Anything outside it throws a `RangeError`, at either end and in either direction.
+So do malformed dates, and a BS day its month does not have — `2082-08-30`, say,
+where Mangsir 2082 is only 29 days long.
 
 ## Events
 

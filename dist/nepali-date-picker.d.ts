@@ -79,6 +79,30 @@ declare class NepaliDatePicker {
         day: number | string
     ): NepaliDatePicker.NepaliDate;
 
+    /**
+     * Convert a Bikram Sambat (BS) date to Gregorian (AD).
+     *
+     * Unlike {@link NepaliDatePicker.convertToNepaliDate}, both the `bsMonth`
+     * **argument** and `month` in the result are **1-indexed** - matching the
+     * `YYYY-MM-DD` strings the picker itself produces.
+     *
+     * Round-tripping the result of `convertToNepaliDate` therefore needs `+ 1`:
+     *
+     * ```ts
+     * const bs = NepaliDatePicker.convertToNepaliDate(2025, 4, 14);
+     * NepaliDatePicker.convertToEnglishDate(bs.year, bs.month + 1, bs.date);
+     * ```
+     *
+     * Supports BS 2000-09-17 to 2090-12-30, the same window as
+     * `convertToNepaliDate` seen from the other side. Anything outside it, or a
+     * day the BS month does not have, throws a `RangeError`.
+     */
+    static convertToEnglishDate(
+        bsYear: number | string,
+        bsMonth: number | string,
+        bsDay: number | string
+    ): NepaliDatePicker.EnglishDate;
+
     /** Whether a Gregorian year is a leap year. */
     static isLeapYear(year: number | string): boolean;
 }
@@ -124,6 +148,14 @@ declare namespace NepaliDatePicker {
     interface NepaliDate {
         year: number;
         /** 0 = Baishakh ... 11 = Chaitra. */
+        month: number;
+        date: number;
+    }
+
+    /** A Gregorian date, with a one-indexed month. */
+    interface EnglishDate {
+        year: number;
+        /** 1 = January ... 12 = December. */
         month: number;
         date: number;
     }
