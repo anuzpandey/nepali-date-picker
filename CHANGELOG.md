@@ -8,6 +8,20 @@ repository at release time, alongside `dist/` and the docs.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.0] - 2026-09-20
+
+### Added
+
+- **TypeScript definitions now ship with the package.** Nothing extra to
+  install — `types` points at `dist/nepali-date-picker.d.ts`. Option values are
+  literal unions, so a typo in `theme` or `format` is a compile error instead of
+  a silent fallback, and the `nepali-date-change` event is typed through
+  `HTMLElementEventMap`.
+
+  Two things the types make explicit that the docs previously got wrong:
+  `getSelectedDatesFormatted()` returns a string, not an array, and
+  `convertToNepaliDate()` returns `date` with a zero-indexed `month`.
+
 ## [2.7.1] - 2026-09-20
 
 ### Fixed

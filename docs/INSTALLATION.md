@@ -79,6 +79,32 @@ Use jsDelivr CDN for instant access:
 > have been loading that URL it has been working only because jsDelivr minifies
 > unknown `.min.js` requests on the fly.
 
+## TypeScript
+
+Type definitions ship with the package — nothing extra to install.
+
+```ts
+import NepaliDatePicker from '@anuz-pandey/nepali-date-picker';
+
+const picker = new NepaliDatePicker('#date', {
+  mode: 'multiple',
+  theme: 'soft',
+  minDate: '2082-01-01',
+});
+
+const dates: string[] = picker.getSelectedDates();
+```
+
+Option values are literal unions, so a typo in `theme` or `format` is a compile
+error rather than a silent fallback. The `nepali-date-change` event is typed too:
+
+```ts
+input.addEventListener('nepali-date-change', (event) => {
+  event.detail.date;          // string
+  event.detail.selectedDates; // string[] | undefined
+});
+```
+
 ## HTML Structure Requirement
 
 **Important:** The input field must be wrapped in a container with `position: relative`:
