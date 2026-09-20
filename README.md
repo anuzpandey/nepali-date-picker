@@ -17,7 +17,7 @@ Lightweight, powerful JavaScript Nepali date picker with **zero dependencies**.
 - 🌍 **Bilingual** - English & Nepali support
 - 🎨 **Themeable** - 3 themes + dark mode
 - 📅 **Smart Constraints** - Min/max dates, disable specific dates
-- 🪂 **Lightweight** - ~26KB minified (JS only)
+- 🪂 **Lightweight** - ~27KB minified (JS only)
 - 🚫 **No Dependencies** - Zero external libraries
 - ⚡ **Framework Compatible** - Vue, React, Angular, Alpine, Livewire
 - 🔊 **DOM Events** - Native `input`, `change`, and custom events

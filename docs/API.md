@@ -60,7 +60,7 @@ new NepaliDatePicker(selector, {
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `mode` | string | `'basic'` | Selection mode: `'basic'` (single) or `'multiple'` (multiple) |
-| `selectedDatesFormat` | string \| function | `'array'` | Format for multiple mode: `'array'`, `'comma'`, `'json'`, or custom function |
+| `selectedDatesFormat` | string \| function | `'array'` | How `getSelectedDatesFormatted()` and the input field render a multiple selection: `'array'` and `'comma'` both give `'2082-01-15, 2082-01-20'`, `'json'` gives `'["2082-01-15","2082-01-20"]'`, or pass a function receiving the array of dates. For an actual array use `getSelectedDates()`. |
 
 ### Interaction
 
@@ -109,7 +109,8 @@ picker.getSelectedDates();              // → ['2082-01-15', '2082-02-20']
 // Multiple mode - set selected dates
 picker.setSelectedDates(['2082-01-15', '2082-01-20']);
 
-// Multiple mode - get formatted dates
+// Multiple mode - get the selection rendered per selectedDatesFormat.
+// Always returns a string, whichever format is configured.
 picker.getSelectedDatesFormatted();     // → '2082-01-15, 2082-01-20'
 
 // Multiple mode - clear all selections
@@ -125,11 +126,25 @@ picker.getMaxDate();                    // → '2082-12-31'
 ### Static Methods
 
 ```javascript
-// Convert English (AD) date to Nepali (BS) date
+// Convert an English (AD) date to Nepali (BS)
 NepaliDatePicker.convertToNepaliDate(year, month, day);
 // Example: NepaliDatePicker.convertToNepaliDate(1996, 4, 22)
-// Result: { year: 2053, month: 1, day: 10 }
+// Result: { year: 2053, month: 0, date: 10 }
+
+// Whether an AD year is a leap year
+NepaliDatePicker.isLeapYear(2024);      // → true
 ```
+
+> **Note on `convertToNepaliDate`:** the AD `month` argument is **1-indexed**
+> (1 = January), but the `month` in the returned object is **0-indexed**
+> (0 = Baishakh), and the day is returned as `date`, not `day`.
+
+Conversion is backed by a calendar table covering BS 2000–2090, so AD dates from
+**1944-01-01 to 2034-04-13** (BS 2090-12-30) are supported. A date past that end
+throws a `RangeError`.
+
+> **Dates before 1944-01-01 are not supported** and currently return an incorrect
+> result instead of raising an error. Do not rely on them.
 
 ## Events
 
