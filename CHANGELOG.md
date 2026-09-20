@@ -8,6 +8,30 @@ repository at release time, alongside `dist/` and the docs.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.11.0] - 2026-09-21
+
+### Fixed
+
+- **The four documented instance properties are now declared in the TypeScript
+  definitions.** `currentYear`, `currentMonth`, `currentDay` and `today` are
+  documented as available on a picker, but only `instanceId` was declared — so
+  a TypeScript user following the docs got four `TS2339: Property does not
+  exist` errors with no workaround short of casting to `any`.
+
+  No runtime change; the properties have always been there.
+
+### Added
+
+- **Instance properties are documented**, in `docs/API.md` and in the
+  declarations, including two things that were not written down anywhere:
+
+  - `today` is **Gregorian** while `currentYear` / `currentMonth` /
+    `currentDay` are **Bikram Sambat**, so `picker.today.getFullYear()` and
+    `picker.currentYear` disagree on purpose — 2026 against 2083.
+  - `currentMonth` is **0-indexed**, like `convertToNepaliDate()` and
+    `event.detail.dateObject`, and therefore one less than the month in the
+    `YYYY-MM-DD` strings the picker produces.
+
 ## [2.10.0] - 2026-09-21
 
 ### Added

@@ -20,6 +20,36 @@ declare class NepaliDatePicker {
     readonly instanceId: string;
 
     /**
+     * Today's **Gregorian** date, captured when the picker was constructed.
+     *
+     * Note this is the only one of these properties in the AD calendar — the
+     * three below are Bikram Sambat, so `today.getFullYear()` and
+     * {@link currentYear} deliberately disagree (2026 vs 2083).
+     *
+     * These four are declared `readonly` because they are for reading. At
+     * runtime they are ordinary properties, and assigning to the three BS ones
+     * before the picker first opens does change which month it opens on — but
+     * that is a side effect of how the calendar initialises, not supported API.
+     */
+    readonly today: Date;
+
+    /** Today's **Bikram Sambat** year, e.g. `2083`. */
+    readonly currentYear: number;
+
+    /**
+     * Today's **Bikram Sambat** month, **0-indexed**: 0 = Baishakh … 11 = Chaitra.
+     *
+     * Same indexing as the `month` returned by
+     * {@link NepaliDatePicker.convertToNepaliDate} and carried on
+     * `event.detail.dateObject`, and one less than the month in every
+     * `YYYY-MM-DD` string the picker produces. Add 1 before comparing the two.
+     */
+    readonly currentMonth: number;
+
+    /** Today's **Bikram Sambat** day of the month, 1–32. */
+    readonly currentDay: number;
+
+    /**
      * Selected dates as normalised `YYYY-MM-DD` strings, in selection order.
      * Always empty unless `mode` is `'multiple'`. Returns a copy.
      */

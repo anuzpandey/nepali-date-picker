@@ -123,6 +123,35 @@ picker.getMinDate();                    // → '2082-01-01'
 picker.getMaxDate();                    // → '2082-12-31'
 ```
 
+### Instance Properties
+
+Five properties are available on a constructed picker:
+
+```javascript
+const picker = new NepaliDatePicker('#selector');
+
+picker.instanceId;      // → 'k3x9fq2a1'  unique per picker, useful when debugging
+picker.today;           // → Date         today, GREGORIAN
+picker.currentYear;     // → 2083         today, BIKRAM SAMBAT
+picker.currentMonth;    // → 5            today, BIKRAM SAMBAT, 0-indexed
+picker.currentDay;      // → 5            today, BIKRAM SAMBAT, 1-32
+```
+
+> **`today` is the only one in the AD calendar.** The other three are BS, so
+> `picker.today.getFullYear()` and `picker.currentYear` disagree on purpose —
+> 2026 against 2083. They describe the same day in two calendars.
+
+> **`currentMonth` is 0-indexed** (0 = Baishakh), matching
+> `convertToNepaliDate()` and `event.detail.dateObject`. That is one less than
+> the month in every `YYYY-MM-DD` string the picker produces, so add 1 before
+> comparing the two. See [Month indexing](#month-indexing).
+
+These are meant to be **read**. Assigning to `currentYear` / `currentMonth` /
+`currentDay` before the picker is first opened does happen to change which month
+it opens on, but that is a side effect of how the calendar initialises, not a
+supported way to control it — the TypeScript declarations mark all five
+`readonly`, and nothing guarantees it keeps working.
+
 ### Static Methods
 
 ```javascript
