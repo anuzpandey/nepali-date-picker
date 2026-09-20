@@ -66,12 +66,18 @@ Use jsDelivr CDN for instant access:
 
 ```html
 <!-- Bundle (JS + CSS) -->
-<script src="https://cdn.jsdelivr.net/npm/@anuz-pandey/nepali-date-picker/dist/nepali-date-picker.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@anuz-pandey/nepali-date-picker/dist/nepali-date-picker.bundle.js"></script>
 
 <!-- OR Separate Files -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@anuz-pandey/nepali-date-picker/dist/nepali-date-picker.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@anuz-pandey/nepali-date-picker/dist/nepali-date-picker.min.js"></script>
 ```
+
+> Both builds are already minified — `nepali-date-picker.bundle.js` carries the
+> CSS inside it, while `nepali-date-picker.min.js` is the JavaScript alone and
+> needs the stylesheet loaded separately. There is no `bundle.min.js`; if you
+> have been loading that URL it has been working only because jsDelivr minifies
+> unknown `.min.js` requests on the fly.
 
 ## HTML Structure Requirement
 

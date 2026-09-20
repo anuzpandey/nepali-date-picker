@@ -8,6 +8,32 @@ repository at release time, alongside `dist/` and the docs.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.1] - 2026-09-20
+
+### Fixed
+
+- **AD dates before 1944 are now rejected instead of converting to nonsense.**
+  `convertToNepaliDate()` counts forward from an AD 1944 anchor, and for earlier
+  years it returned a result somewhere inside BS 2000–2001 with no error — not
+  even in order, since `1943-12-31` came out a year *ahead* of `1944-01-01`.
+  Such dates now throw a `RangeError`, matching what already happened past the
+  other end of the range.
+- `convertToNepaliDate()` also rejects an out-of-range month or day, rather than
+  quietly treating month `0` as January.
+
+### Added
+
+- A `LICENSE` file. The package has always declared MIT in `package.json` and
+  the README, but no licence text shipped with it.
+
+### Documentation
+
+- Corrected the CDN instructions. They pointed at
+  `nepali-date-picker.bundle.min.js`, which has never existed — the URL worked
+  only because jsDelivr minifies unknown `.min.js` requests on the fly. The real
+  files are `nepali-date-picker.bundle.js` (JS with CSS inlined) and
+  `nepali-date-picker.min.js` (JS alone), both already minified.
+
 ## [2.7.0] - 2026-09-20
 
 ### Fixed

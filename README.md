@@ -126,7 +126,7 @@ yarn add @anuz-pandey/nepali-date-picker
 ### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@anuz-pandey/nepali-date-picker/dist/nepali-date-picker.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@anuz-pandey/nepali-date-picker/dist/nepali-date-picker.bundle.js"></script>
 
 <!-- OR separate files -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@anuz-pandey/nepali-date-picker/dist/nepali-date-picker.min.css">
@@ -154,7 +154,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
 
 ## 📄 License
 
-MIT License - feel free to use in your projects
+MIT License - see [LICENSE](LICENSE) for details. Feel free to use in your projects.
 
 ## 🙌 Support
 
