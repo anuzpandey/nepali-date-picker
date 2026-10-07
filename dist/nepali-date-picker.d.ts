@@ -236,6 +236,16 @@ declare namespace NepaliDatePicker {
         /** Visual style. Default `'flat'`. */
         theme?: Theme;
 
+        /**
+         * Tighter cells and spacing at the same proportions — the cell drops
+         * from 2.5rem to 2rem and everything around it scales with it, rather
+         * than only the padding shrinking. Default `false`.
+         *
+         * Implemented by overriding sizing custom properties on `.ap-card`, so
+         * it can be adjusted or imitated from your own stylesheet.
+         */
+        compact?: boolean;
+
         /** Use the dark colour scheme. Default `false`. */
         darkMode?: boolean;
 

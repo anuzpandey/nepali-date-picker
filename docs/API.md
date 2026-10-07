@@ -8,6 +8,7 @@ new NepaliDatePicker(selector, {
   format: 'YYYY-MM-DD',
   locale: 'np',
   theme: 'flat',
+  compact: false,
   darkMode: false,
   daysFormat: 'dd',
   position: 'left',
@@ -50,6 +51,7 @@ new NepaliDatePicker(selector, {
 | `format` | string | `'YYYY-MM-DD'` | Date format: `'YYYY-MM-DD'`, `'YYYY/MM/DD'`, `'YYYY.MM.DD'`, `'DD-MM-YYYY'`, `'DD/MM/YYYY'`, `'DD.MM.YYYY'` |
 | `locale` | string | `'np'` | Language: `'np'` (Nepali) or `'en'` (English) |
 | `theme` | string | `'flat'` | Theme style: `'flat'`, `'soft'`, `'bordered'` |
+| `compact` | boolean | `false` | Tighter cells and spacing at the same proportions — see [Sizing](#sizing) |
 | `darkMode` | boolean | `false` | Enable dark mode |
 | `daysFormat` | string | `'dd'` | Day name format: `'ddd'` (full), `'dd'` (short), `'d'` (single) |
 | `position` | string | `'left'` | Calendar position: `'left'`, `'right'`, `'center'` |
@@ -210,6 +212,60 @@ counts from a 1944 anchor, so the supported window is:
 Anything outside it throws a `RangeError`, at either end and in either direction.
 So do malformed dates, and a BS day its month does not have — `2082-08-30`, say,
 where Mangsir 2082 is only 29 days long.
+
+## Sizing
+
+The picker is laid out on a single cell size. `compact: true` drops that cell from
+**2.5rem to 2rem** and brings the spacing around it down in proportion, so the grid
+stays square rather than leaving small cells inside the original padding:
+
+```javascript
+new NepaliDatePicker('#date-picker', { compact: true });
+```
+
+It applies the class `ap-compact` to the card. Everything it changes is a custom
+property on `.ap-card`:
+
+| Token | Default | Compact |
+|---|---|---|
+| `--ap-cell` | `2.5rem` | `2rem` |
+| `--ap-gap` | `0.25rem` | `0.125rem` |
+| `--ap-card-padding` | `0.5rem` | `0.375rem` |
+| `--ap-font-size` | `0.875rem` | `0.8125rem` |
+| `--ap-line-height` | `1.25rem` | `1.125rem` |
+| `--ap-icon` | `1.25rem` | `1rem` |
+| `--ap-select-padding-y` | `0.25rem` | `0.125rem` |
+| `--ap-select-padding-x` | `1rem` | `0.5rem` |
+| `--ap-table-margin-top` | `0.5rem` | `0.25rem` |
+| `--ap-thead-padding-top` | `0.5rem` | `0.25rem` |
+| `--ap-thead-padding-bottom` | `0.75rem` | `0.375rem` |
+| `--ap-width-ddd` | `4rem` | `3.25rem` |
+| `--ap-width-np-ddd` | `5rem` | `4rem` |
+
+Every size in the stylesheet reads one of these, so overriding a token is enough
+to change the scale — no rule hardcodes a measurement:
+
+```css
+/* between compact and the default */
+.ap-card.ap-compact {
+  --ap-cell: 2.25rem;
+  --ap-gap: 0.1875rem;
+}
+
+/* your own scale, without using the option */
+.ap-card.my-picker {
+  --ap-cell: 1.75rem;
+  --ap-gap: 0.125rem;
+  --ap-font-size: 0.75rem;
+}
+```
+
+> The tokens are declared on `.ap-card`, not `:root`, so each picker carries its
+> own scale. Two pickers on the same page can differ, and overriding `:root` will
+> not reach them.
+
+`--ap-width-ddd` and `--ap-width-np-ddd` only apply when `daysFormat: 'ddd'`, where
+the column has to fit a full day name.
 
 ## Events
 

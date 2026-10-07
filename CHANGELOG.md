@@ -8,6 +8,41 @@ repository at release time, alongside `dist/` and the docs.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.12.0] - 2026-10-07
+
+### Added
+
+- **`compact: true`.** Tighter cells and spacing at the same proportions — the
+  cell drops from 2.5rem to 2rem and the spacing around it comes down with it,
+  so the grid stays square instead of leaving small cells inside the original
+  padding.
+
+  ```javascript
+  new NepaliDatePicker('#date-picker', { compact: true });
+  ```
+
+- **Sizing custom properties.** Every measurement in the stylesheet now reads a
+  token on `.ap-card` — `--ap-cell`, `--ap-gap`, `--ap-card-padding` and ten
+  others. `compact` is nothing more than an override of those, so any scale in
+  between is available from your own CSS. See
+  [docs/API.md](docs/API.md#sizing).
+
+  The tokens are declared on `.ap-card` rather than `:root`, so each picker
+  carries its own scale and two pickers on a page can differ.
+
+### Fixed
+
+- **`nepali-date-picker.min.css` was missing the min/max date styling.** The
+  rules for `[data-disable-reason="min-date"]` and `"max-date"` — the reduced
+  opacity and grey background on dates outside the allowed range — were added to
+  `nepali-date-picker.css` in 2.5.0 and never copied into the minified
+  stylesheet. Anyone loading the minified file got no visual treatment for
+  out-of-range dates at all. Present in every release from 2.5.0 to 2.11.0.
+
+  The minified stylesheet is generated from the source during the build now
+  rather than hand-maintained, and a test asserts the two files declare the same
+  selectors and properties, so they cannot drift apart again.
+
 ## [2.11.0] - 2026-09-21
 
 ### Fixed

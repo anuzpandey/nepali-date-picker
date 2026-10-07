@@ -72,6 +72,8 @@ Current feature status and planned enhancements.
 | Theme: flat | ✅ Done | v1.0 |
 | Theme: soft | ✅ Done | v1.0 |
 | Theme: bordered | ✅ Done | v1.0 |
+| Compact sizing | ✅ Done | v2.12 |
+| Sizing custom properties | ✅ Done | v2.12 |
 
 ## Date Display
 
