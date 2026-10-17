@@ -530,11 +530,12 @@ uses, so it inherits the theme and dark mode without a second rule.
 }
 ```
 
-The panel **overlays** the calendar rather than replacing it, and the calendar
-keeps its space with `visibility: hidden`. That is deliberate: `.ap-card` is
-`max-width: fit-content`, so taking the calendar out of the layout would
-collapse the card onto the panel's own width and the picker would change size
-as you opened it.
+The panel **replaces** the calendar while it is open — the header, the grid and
+the footer leave the layout — so the card is exactly as tall as the panel
+rather than carrying a band of empty card below it. The card's width is pinned
+for the duration, so the picker does not change size as it opens: `.ap-card` is
+`max-width: fit-content`, and with the calendar out of the flow that would
+otherwise collapse onto the panel's own width.
 
 ## Sizing
 
