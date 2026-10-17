@@ -17,6 +17,7 @@ new NepaliDatePicker(selector, {
   // Selection modes
   mode: 'basic',
   selectedDatesFormat: 'array',
+  rangeSeparator: ' - ',
 
   // Interaction
   closeOnDateSelect: true,
@@ -61,7 +62,8 @@ new NepaliDatePicker(selector, {
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `mode` | string | `'basic'` | Selection mode: `'basic'` (single) or `'multiple'` (multiple) |
+| `mode` | string | `'basic'` | Selection mode: `'basic'` (single), `'multiple'`, or `'range'` — see [Range selection](#range-selection) |
+| `rangeSeparator` | string | `' - '` | Joins the two ends in the input value in `'range'` mode, giving `2082-01-05 - 2082-01-10` |
 | `selectedDatesFormat` | string \| function | `'array'` | How `getSelectedDatesFormatted()` and the input field render a multiple selection: `'array'` and `'comma'` both give `'2082-01-15, 2082-01-20'`, `'json'` gives `'["2082-01-15","2082-01-20"]'`, or pass a function receiving the array of dates. For an actual array use `getSelectedDates()`. |
 
 ### Interaction
@@ -123,6 +125,12 @@ picker.setMinDate('2082-01-01');
 picker.setMaxDate('2082-12-31');
 picker.getMinDate();                    // → '2082-01-01'
 picker.getMaxDate();                    // → '2082-12-31'
+
+// Range mode
+picker.getRange();                      // → { start: '2082-01-05', end: '2082-01-10' }
+picker.setRange('2082-01-05', '2082-01-10');
+picker.setRange('2082-01-05');          // half-open: end stays null
+picker.setRange(null);                  // clears
 ```
 
 ### Instance Properties
@@ -212,6 +220,105 @@ counts from a 1944 anchor, so the supported window is:
 Anything outside it throws a `RangeError`, at either end and in either direction.
 So do malformed dates, and a BS day its month does not have — `2082-08-30`, say,
 where Mangsir 2082 is only 29 days long.
+
+## Range selection
+
+`mode: 'range'` lets the user pick a start and an end.
+
+```javascript
+const picker = new NepaliDatePicker('#date-picker', { mode: 'range' });
+```
+
+### How a range is picked
+
+| | |
+|---|---|
+| First click | sets the start; the calendar **stays open** |
+| Second click on or after the start | closes the range, and the calendar closes with it |
+| Second click **before** the start | read as starting again, not as a backwards range |
+| Clicking the start twice | a single-day range |
+
+Moving the pointer between the two clicks previews the span.
+
+`closeOnDateSelect` still applies, but only to the second click — closing after
+the first would make the range impossible to finish.
+
+### Reading and setting it
+
+```javascript
+picker.getRange();
+// { start: '2082-01-05', end: '2082-01-10' }   complete
+// { start: '2082-01-05', end: null }           only the start is picked
+// { start: null, end: null }                   nothing picked
+```
+
+`end` is `null` mid-selection, so a half-chosen range is distinguishable from an
+empty one. Both are normalised `YYYY-MM-DD` strings regardless of the `format`
+option, and `setRange()` expects the same — matching `setSelectedDates()`.
+
+An `end` before the `start` is refused with a warning rather than silently
+swapped: a caller passing them the wrong way round has a bug, and quietly
+correcting it hides that.
+
+`getSelectedDates()` stays empty in range mode — a range is one value with two
+ends, not a list of dates.
+
+### The change event
+
+```javascript
+input.addEventListener('nepali-date-change', (e) => {
+  const { start, end } = e.detail.range;
+
+  if (end === null) return;          // only the start so far
+
+  console.log(start, end);           // '2082-01-05' '2082-01-10'
+  console.log(e.detail.disabledInRange);
+});
+```
+
+### Dates the range spans but cannot select
+
+The two **ends** must be selectable, but the span between them may cross
+disabled days. Rather than blocking the selection, the event reports them:
+
+```javascript
+new NepaliDatePicker('#date-picker', {
+  mode: 'range',
+  disableDates: ['2082-01-07'],
+});
+
+// picking 05 → 10 is allowed, and reports:
+// e.detail.disabledInRange === ['2082-01-07']
+```
+
+Only `disableDates` and `disableToday` can produce these. `minDate`/`maxDate`,
+`disableBeforeToday` and `disableAfterToday` all disable a contiguous run from
+one end, so if both ends of the range are selectable then everything between
+them is too.
+
+### Styling
+
+| Class | On |
+|---|---|
+| `ap-range-start` | the first end |
+| `ap-range-end` | the second end |
+| `ap-in-range` | every day strictly between them |
+| `ap-in-range-preview` | the hover preview, before the second click |
+
+Both ends also carry `selected`, so they match a single-date selection and
+inherit the theme.
+
+```css
+.ap-cell-button.ap-in-range {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+
+/* a single-day range is both ends at once */
+.ap-cell-button.ap-range-start.ap-range-end {
+  border-radius: 0.375rem;
+}
+```
 
 ## Sizing
 

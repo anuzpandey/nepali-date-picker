@@ -8,6 +8,51 @@ repository at release time, alongside `dist/` and the docs.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.13.0] - 2026-10-17
+
+### Added
+
+- **Range selection.** `mode: 'range'` lets the user pick a start and an end.
+  Listed as planned since v1.0, and referenced in the `mode` option comment for
+  just as long.
+
+  ```javascript
+  const picker = new NepaliDatePicker('#date-picker', { mode: 'range' });
+
+  picker.getRange();  // { start: '2082-01-05', end: '2082-01-10' }
+  ```
+
+  The first click sets the start and leaves the calendar open; the second closes
+  the range. A second click **before** the start is read as starting again
+  rather than as a backwards range, and clicking the start twice gives a
+  single-day range. Moving the pointer between the two clicks previews the span.
+
+  `end` is `null` while only the start is picked, so a half-chosen range is
+  distinguishable from an empty one.
+
+- **`getRange()` and `setRange(start, end)`.** Both use normalised
+  `YYYY-MM-DD`, matching `setSelectedDates()`. An `end` before the `start` is
+  refused with a warning rather than silently swapped.
+
+- **`rangeSeparator`**, default `' - '`, joining the two ends in the input value.
+
+- **A range may span disabled dates.** The two ends must be selectable, but the
+  days between them need not be. Rather than blocking the selection, the change
+  event reports them as `detail.disabledInRange` so the application can warn,
+  split the range, or accept it.
+
+- **Four styling classes:** `ap-range-start`, `ap-range-end`, `ap-in-range` and
+  `ap-in-range-preview`. Both ends also carry `selected`, so they match a
+  single-date selection and inherit the theme.
+
+### Fixed
+
+- **`mode: 'range'` no longer silently behaves as `'basic'`.** The option
+  comment has advertised `'range'` since v1.0 while only `'basic'` and
+  `'multiple'` were implemented, so passing it gave a plain single-date picker
+  with no warning. TypeScript users were protected by the `Mode` union;
+  JavaScript users were not.
+
 ## [2.12.0] - 2026-10-07
 
 ### Added

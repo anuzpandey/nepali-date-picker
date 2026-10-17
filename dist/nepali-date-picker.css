@@ -327,6 +327,52 @@
     margin-right: auto !important;
 }
 
+/*
+ * Range selection.
+ *
+ * The two ends reuse .selected, so they match a single-date selection and pick
+ * up the theme automatically. Only the span between them needs its own
+ * treatment, deliberately quieter than the ends so the boundaries stay
+ * readable.
+ */
+.ap-table__thead__tr_td > button.ap-in-range,
+.ap-table__thead__tr_td > button.ap-in-range-preview {
+    background: var(--gray-100);
+    color: var(--ap-black);
+    border-radius: 0;
+}
+
+/* The preview is the uncommitted half, so it reads one step lighter. */
+.ap-table__thead__tr_td > button.ap-in-range-preview {
+    background: var(--gray-50);
+}
+
+.ap-table__thead__tr_td > button.ap-in-range:hover,
+.ap-table__thead__tr_td > button.ap-in-range-preview:hover {
+    background: var(--gray-200);
+    color: var(--ap-black);
+}
+
+/*
+ * Square off the inner edges so a run of cells reads as one bar rather than a
+ * row of separate pills. The gap between cells means they do not actually
+ * touch, so this is a hint rather than a continuous fill.
+ */
+.ap-table__thead__tr_td > button.ap-range-start {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.ap-table__thead__tr_td > button.ap-range-end {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* A single-day range is both ends at once and keeps its full rounding. */
+.ap-table__thead__tr_td > button.ap-range-start.ap-range-end {
+    border-radius: var(--rounded-md);
+}
+
 /* Min/Max Date Constraint Styling */
 .ap-cell-button:disabled[data-disable-reason="min-date"],
 .ap-cell-button:disabled[data-disable-reason="max-date"] {

@@ -25,7 +25,7 @@ Current feature status and planned enhancements.
 |---------|--------|---------|
 | Single date selection (basic mode) | ✅ Done | v1.0 |
 | Multiple date selection | ✅ Done | v2.5.0 |
-| Date range selection | ⬜ Planned | — |
+| Date range selection | ✅ Done | v2.13 |
 
 ## Date Formatting
 

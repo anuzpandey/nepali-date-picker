@@ -87,6 +87,26 @@ declare class NepaliDatePicker {
     getMaxDate(): string | null;
 
     /**
+     * The selected range, as normalised `YYYY-MM-DD` strings.
+     *
+     * `end` is `null` while only the start has been picked. Returns a fresh
+     * object each time. Always `{ start: null, end: null }` outside
+     * `'range'` mode.
+     */
+    getRange(): NepaliDatePicker.DateRange;
+
+    /**
+     * Set the range. Both arguments are `YYYY-MM-DD`, matching
+     * {@link setSelectedDates} rather than the picker's `format`.
+     *
+     * `setRange(start)` leaves it half-open — the state between the two
+     * clicks. `setRange(null)` clears it. An `end` before `start` is refused
+     * with a warning rather than silently swapped. No effect outside
+     * `'range'` mode.
+     */
+    setRange(start: string | null, end?: string | null): void;
+
+    /**
      * Internal. Called by the shared document click listener so a click can be
      * routed to the instance owning the calendar. Not intended to be called
      * directly.
@@ -157,8 +177,7 @@ declare namespace NepaliDatePicker {
     /** `'ddd'` full name, `'dd'` short name, `'d'` single letter. */
     type DaysFormat = 'ddd' | 'dd' | 'd';
 
-    /** `'range'` appears in the roadmap but is not implemented yet. */
-    type Mode = 'basic' | 'multiple';
+    type Mode = 'basic' | 'multiple' | 'range';
 
     type DayName =
         | 'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday'
@@ -182,6 +201,17 @@ declare namespace NepaliDatePicker {
         date: number;
     }
 
+    /**
+     * A selected range, as normalised `YYYY-MM-DD` strings.
+     *
+     * `end` is `null` while only the start has been picked, so a half-chosen
+     * range is distinguishable from a finished one.
+     */
+    interface DateRange {
+        start: string | null;
+        end: string | null;
+    }
+
     /** A Gregorian date, with a one-indexed month. */
     interface EnglishDate {
         year: number;
@@ -194,7 +224,18 @@ declare namespace NepaliDatePicker {
         /** Format used for the input value and for parsing. Default `'YYYY-MM-DD'`. */
         format?: DateFormat;
 
-        /** Close the calendar after a date is picked. Default `true`. */
+        /**
+         * Joins the two ends in the input value in `'range'` mode.
+         * Default `' - '`, giving `2082-01-05 - 2082-01-10`.
+         */
+        rangeSeparator?: string;
+
+        /**
+         * Close the calendar after a date is picked. Default `true`.
+         *
+         * In `'range'` mode the calendar closes once the **second** end is
+         * picked, never after the first.
+         */
         closeOnDateSelect?: boolean;
 
         /** Disable every date after today. Default `false`. */
@@ -288,6 +329,15 @@ declare namespace NepaliDatePicker {
         date: string;
         /** Present when a single date was picked. */
         dateObject?: NepaliDate;
+        /** Present in `'range'` mode: both ends, `end` null mid-selection. */
+        range?: DateRange;
+        /**
+         * Present in `'range'` mode: dates inside the range that cannot
+         * themselves be selected, because of `disableDates` or `disableToday`.
+         * Empty when the span is clear. The range is still committed — it is
+         * reported so you can decide what to do about it.
+         */
+        disabledInRange?: string[];
         mode?: Mode;
         /** Present in `'multiple'` mode: every selected date. */
         selectedDates?: string[];
