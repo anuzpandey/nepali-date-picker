@@ -9,6 +9,9 @@ new NepaliDatePicker(selector, {
   locale: 'np',
   theme: 'flat',
   compact: false,
+  todayButton: false,
+  presets: [],
+  englishDates: false,
   darkMode: false,
   daysFormat: 'dd',
   position: 'left',
@@ -53,6 +56,9 @@ new NepaliDatePicker(selector, {
 | `locale` | string | `'np'` | Language: `'np'` (Nepali) or `'en'` (English) |
 | `theme` | string | `'flat'` | Theme style: `'flat'`, `'soft'`, `'bordered'` |
 | `compact` | boolean | `false` | Tighter cells and spacing at the same proportions — see [Sizing](#sizing) |
+| `todayButton` | boolean \| object | `false` | A **Today** button in the footer — see [Footer](#footer-today-and-presets) |
+| `presets` | array | `[]` | Shortcut buttons — see [Footer](#footer-today-and-presets) |
+| `englishDates` | boolean \| object | `false` | Gregorian dates alongside the BS ones — see [English dates](#english-dates) |
 | `darkMode` | boolean | `false` | Enable dark mode |
 | `daysFormat` | string | `'dd'` | Day name format: `'ddd'` (full), `'dd'` (short), `'d'` (single) |
 | `position` | string | `'left'` | Calendar position: `'left'`, `'right'`, `'center'` |
@@ -320,6 +326,156 @@ inherit the theme.
 }
 ```
 
+## Footer: Today and presets
+
+Both render into one row under the calendar, and the footer only exists when at
+least one of them is configured — a picker that asks for neither keeps exactly
+the height it had.
+
+```javascript
+new NepaliDatePicker('#date-picker', {
+  todayButton: true,
+  presets: [
+    { label: 'Tomorrow',  value: () => addDays(new Date(), 1) },
+    { label: 'In a week', value: () => addDays(new Date(), 7) },
+  ],
+});
+```
+
+Both `todayButton` and `englishDates` take **a boolean or an object**. The
+boolean is the common case; the object configures it. In the object form
+`enabled` defaults to `true`, so `{ label: 'Jump' }` means "on, with this
+label".
+
+### Closing
+
+Both follow `closeOnDateSelect`, exactly as clicking a day does.
+
+Set `closeOnSelect: false` where a button is a jump-to action rather than a
+final answer — land near the date, then adjust. It works on the Today button
+and on each preset independently:
+
+```javascript
+new NepaliDatePicker('#date-picker', {
+  todayButton: { closeOnSelect: false },
+  presets: [
+    { label: 'Tomorrow', value: () => addDays(new Date(), 1), closeOnSelect: false },
+    { label: 'New Year', value: '2083-01-01' },   // closes, like a day click
+  ],
+});
+```
+
+In `'multiple'` mode nothing in the footer closes the picker, which is also how
+clicking a day behaves there.
+
+### Today
+
+Selects today. It is **disabled when today is not selectable** — outside `minDate`/`maxDate`, or covered by
+`disableDates` or `disableToday`.
+
+Labelled `'आज'` under `locale: 'np'` and `'Today'` under `'en'`; override with
+`todayButton: { label: '…' }`.
+
+### Presets
+
+Each entry is `{ label, value }`. `value` is the date, or a function returning
+it — the function runs on every click, so `() => addDays(new Date(), 1)` stays
+correct across midnight.
+
+What `value` may resolve to:
+
+| | |
+|---|---|
+| a `Date` | Gregorian, converted for you |
+| a `'YYYY-MM-DD'` string | Bikram Sambat, like every other date option |
+| two of either, as an array | a range in `'range'` mode, or a multiple selection |
+
+In `'multiple'` mode a preset **replaces** the current selection rather than
+adding to it — a preset names a selection, not an addition. Use
+`setSelectedDates([...picker.getSelectedDates(), ...])` from your own handler if
+you want to append.
+
+```javascript
+presets: [
+  { label: 'Tomorrow',  value: () => addDays(new Date(), 1) },  // Date
+  { label: 'New Year',  value: '2082-01-01' },                  // BS string
+  { label: 'That week', value: ['2082-01-05', '2082-01-11'] },  // range
+]
+```
+
+Choosing a preset also navigates the calendar to the month it landed in, so the
+selection is visible rather than somewhere off-screen — and since the picker
+stays open, you can adjust from there.
+
+A malformed entry is skipped with a console warning rather than throwing, and
+labels are escaped before rendering.
+
+### Styling the footer
+
+| Class | On |
+|---|---|
+| `ap-footer` | the row |
+| `ap-footer__button` | every button in it |
+| `ap-today-button` | the Today button |
+| `ap-preset-button` | each preset |
+
+Today is pushed to the trailing edge with `margin-left: auto`; remove that to
+keep everything on one side.
+
+## English dates
+
+`englishDates: true` shows Gregorian dates alongside the Bikram Sambat ones: the
+day number under each date, and the month span under the header.
+
+```javascript
+new NepaliDatePicker('#date-picker', { englishDates: true });
+
+// or, configured
+new NepaliDatePicker('#date-picker', {
+  englishDates: { monthLabel: false, divider: false },
+});
+```
+
+| Key | Default | |
+|---|---|---|
+| `enabled` | `true` | `false` turns it off while keeping the object |
+| `monthLabel` | `true` | the span under the header, e.g. `October/November 2025` |
+| `divider` | `true` | a rule under that span |
+
+### The month span
+
+A Bikram Sambat month never lines up with a Gregorian one — it always starts
+partway through — so the header shows a **range**, not a name. Ashwin 2082 is
+`September/October 2025`; Poush 2082 crosses a year and reads
+`December 2025/January 2026`.
+
+Only the day number goes in the cells. Repeating the month in each one would
+crowd the grid to say what the header already says.
+
+The cell grows from `2.5rem` to `2.625rem` to fit both. The calendar is seven
+cells across, so that is about `0.875rem` wider overall — worth knowing if you
+are placing it in a narrow column. The card will overflow a container too small
+for it rather than clipping a column, since a calendar cannot be narrower than
+seven of them. Adjust it like any other size:
+
+```css
+.ap-card.ap-show-english {
+  --ap-cell: 3rem;
+  --ap-english-font-size: 0.75rem;
+  --ap-english-month-font-size: 0.875rem;
+}
+```
+
+The month span is `.ap-english-month`, and carries
+`.ap-english-month--divided` when the divider is on.
+
+Days with no AD equivalent — before the 1944 conversion anchor, so the first
+eight months of BS 2000 — render without a second number rather than failing.
+
+The secondary number and the month span both carry `aria-hidden`: the cell
+already announces the Bikram Sambat day, and a bare second number read after it
+would be noise. The number is styled with `.ap-english-date`.
+
 ## Choosing a month or year
 
 The header shows the current month and year as buttons. Clicking either opens a
@@ -396,6 +552,7 @@ property on `.ap-card`:
 | Token | Default | Compact |
 |---|---|---|
 | `--ap-cell` | `2.5rem` | `2rem` |
+| `--ap-header-control` | `2rem` | `1.75rem` |
 | `--ap-gap` | `0.25rem` | `0.125rem` |
 | `--ap-card-padding` | `0.5rem` | `0.375rem` |
 | `--ap-font-size` | `0.875rem` | `0.8125rem` |

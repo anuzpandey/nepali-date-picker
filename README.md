@@ -13,11 +13,13 @@ Lightweight, powerful JavaScript Nepali date picker with **zero dependencies**.
 
 ## ✨ Features
 
-- 🎯 **Single & Multiple Selection** - Basic and multiple date modes
+- 🎯 **Single, Multiple & Range Selection** - Three selection modes
 - 🌍 **Bilingual** - English & Nepali support
-- 🎨 **Themeable** - 3 themes + dark mode
+- 🗓️ **Gregorian Dates** - AD days and month alongside the Bikram Sambat ones
+- ⚡ **Today & Presets** - A footer of jump-to buttons you define
+- 🎨 **Themeable** - 3 themes + dark mode, compact scale
 - 📅 **Smart Constraints** - Min/max dates, disable specific dates
-- 🪂 **Lightweight** - ~27KB minified (JS only)
+- 🪂 **Lightweight** - 12KB gzipped (JS only), 45KB raw
 - 🚫 **No Dependencies** - Zero external libraries
 - ⚡ **Framework Compatible** - Vue, React, Angular, Alpine, Livewire
 - 🔊 **DOM Events** - Native `input`, `change`, and custom events
@@ -91,7 +93,36 @@ new NepaliDatePicker('#date-picker', {
 });
 ```
 
-### Date Range (Min/Max)
+### Date Range Selection
+
+```javascript
+new NepaliDatePicker('#date-picker', {
+  mode: 'range',
+  rangeSeparator: ' to '
+});
+```
+
+### Today and Preset Buttons
+
+```javascript
+new NepaliDatePicker('#date-picker', {
+  todayButton: true,
+  presets: [
+    { label: 'Tomorrow',  value: () => { const d = new Date(); d.setDate(d.getDate() + 1); return d } },
+    { label: 'New Year',  value: '2083-01-01' }
+  ]
+});
+```
+
+### Gregorian Dates Alongside
+
+```javascript
+new NepaliDatePicker('#date-picker', {
+  englishDates: true
+});
+```
+
+### Allowed Range (Min/Max)
 
 ```javascript
 new NepaliDatePicker('#date-picker', {

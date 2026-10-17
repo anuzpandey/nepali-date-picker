@@ -202,6 +202,54 @@ declare namespace NepaliDatePicker {
     }
 
     /**
+     * What a preset resolves to: a Gregorian `Date`, a Bikram Sambat
+     * `YYYY-MM-DD` string, or two of either for a range or a multiple
+     * selection.
+     */
+    type PresetValue = Date | string | Array<Date | string>;
+
+    /** A shortcut button in the picker's footer. */
+    interface DatePreset {
+        label: string;
+        /** The date, or a function returning it — evaluated on each click. */
+        value: PresetValue | (() => PresetValue);
+        /**
+         * Close the calendar after this preset is used. Defaults to the
+         * picker's `closeOnDateSelect`. Set `false` for a jump-to preset you
+         * expect the user to adjust from.
+         */
+        closeOnSelect?: boolean;
+    }
+
+    interface TodayButtonOptions {
+        /** Default `true` when the object form is used at all. */
+        enabled?: boolean;
+        /**
+         * Overrides the label. Defaults to `'आज'` under `locale: 'np'` and
+         * `'Today'` under `'en'`.
+         */
+        label?: string | null;
+        /**
+         * Close the calendar after Today is used. Defaults to the picker's
+         * `closeOnDateSelect`.
+         */
+        closeOnSelect?: boolean;
+    }
+
+    interface EnglishDatesOptions {
+        /** Default `true` when the object form is used at all. */
+        enabled?: boolean;
+        /**
+         * The Gregorian span under the header, e.g. `October/November 2025`.
+         * A Bikram Sambat month never lines up with a Gregorian one, so it is
+         * a range rather than a name. Default `true`.
+         */
+        monthLabel?: boolean;
+        /** A rule under the month span. Default `true`. */
+        divider?: boolean;
+    }
+
+    /**
      * A selected range, as normalised `YYYY-MM-DD` strings.
      *
      * `end` is `null` while only the start has been picked, so a half-chosen
@@ -276,6 +324,53 @@ declare namespace NepaliDatePicker {
 
         /** Visual style. Default `'flat'`. */
         theme?: Theme;
+
+        /**
+         * A **Today** button in a footer under the calendar.
+         *
+         * `true` for the defaults, or an object to configure it. Disabled when
+         * today is not selectable — outside `minDate`/`maxDate`, or covered by
+         * `disableDates`/`disableToday`. Default `false`.
+         *
+         * ```ts
+         * todayButton: true
+         * todayButton: { label: 'Go to today', closeOnSelect: false }
+         * ```
+         */
+        todayButton?: boolean | TodayButtonOptions;
+
+        /**
+         * Shortcut buttons in the footer, rendered before Today.
+         *
+         * ```ts
+         * presets: [
+         *   { label: 'Tomorrow',  value: () => addDays(new Date(), 1) },
+         *   { label: 'In a week', value: () => addDays(new Date(), 7) },
+         * ]
+         * ```
+         *
+         * A malformed entry is skipped with a console warning rather than
+         * throwing. Labels are escaped before rendering.
+         */
+        presets?: DatePreset[];
+
+        /**
+         * Show Gregorian dates alongside the Bikram Sambat ones: the day
+         * number under each date, and the month span under the header.
+         *
+         * `true` for the defaults, or an object to configure it. Default
+         * `false`.
+         *
+         * ```ts
+         * englishDates: true
+         * englishDates: { monthLabel: false, divider: false }
+         * ```
+         *
+         * The cell grows to fit both numbers, so the calendar is wider than it
+         * would otherwise be. Days with no Gregorian equivalent — before the
+         * 1944 conversion anchor — render without a second number.
+         */
+        englishDates?: boolean | EnglishDatesOptions;
 
         /**
          * Tighter cells and spacing at the same proportions — the cell drops

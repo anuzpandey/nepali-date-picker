@@ -75,6 +75,10 @@ Current feature status and planned enhancements.
 | Compact sizing | ✅ Done | v2.12 |
 | Month & year grid pickers | ✅ Done | v2.14 |
 | Keyboard navigation in the header | ✅ Done | v2.14 |
+| Today button | ✅ Done | v2.15 |
+| Preset buttons | ✅ Done | v2.15 |
+| AD dates alongside BS | ✅ Done | v2.15 |
+| Gregorian month span in the header | ✅ Done | v2.15 |
 | Sizing custom properties | ✅ Done | v2.12 |
 
 ## Date Display

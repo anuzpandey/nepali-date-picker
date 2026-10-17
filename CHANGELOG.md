@@ -8,6 +8,145 @@ repository at release time, alongside `dist/` and the docs.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.15.0] - 2026-10-17
+
+### Added
+
+- **A `Today` button**, via `todayButton: true`. It sits in a footer under the
+  calendar and is **disabled when today is not selectable** — outside
+  `minDate`/`maxDate`, or covered by `disableDates`/`disableToday`. Labelled
+  `'आज'` or `'Today'` by locale.
+
+  The object form takes a label and a closing rule of its own:
+
+  ```javascript
+  todayButton: { enabled: true, label: 'Go to today', closeOnSelect: false }
+  ```
+
+- **Preset buttons**, via `presets`:
+
+  ```javascript
+  presets: [
+    { label: 'Tomorrow',  value: () => addDays(new Date(), 1) },
+    { label: 'In a week', value: () => addDays(new Date(), 7) },
+  ]
+  ```
+
+  `value` may be a Gregorian `Date`, a Bikram Sambat `'YYYY-MM-DD'` string, or
+  a function returning either — evaluated on each click, so a relative preset
+  stays correct across midnight. Two dates in an array give a range in
+  `'range'` mode or a multiple selection in `'multiple'`.
+
+  Choosing a preset navigates the calendar to the month it landed in. A
+  malformed entry is skipped with a warning rather than throwing, and labels
+  are escaped before rendering. Each preset may carry its own `closeOnSelect`.
+
+- **Gregorian dates alongside the Bikram Sambat ones**, via
+  `englishDates: true` — the day number under each date, and the month span
+  under the header.
+
+  A Bikram Sambat month never lines up with a Gregorian one, so the span is a
+  range rather than a name: `September/October 2026`, or `December
+  2025/January 2026` where it crosses a year. A rule under it separates it
+  from the grid.
+
+  ```javascript
+  englishDates: { enabled: true, monthLabel: true, divider: true }
+  ```
+
+  The cell grows from `2.5rem` to `2.625rem` to fit both numbers, so the
+  calendar is about `0.875rem` wider across its seven columns — adjustable
+  through the sizing tokens. Days before the 1944 conversion anchor render
+  without a second number rather than failing. Both the day number and the
+  month span are `aria-hidden`, since the cell already announces the BS day.
+
+- **Styling classes:** `ap-footer`, `ap-footer__button`, `ap-today-button`,
+  `ap-preset-button`, `ap-english-date` on the secondary number, and
+  `ap-english-month` (with `ap-english-month--divided`) on the month span.
+
+**Footer buttons close the picker exactly as clicking a day does** — they
+follow `closeOnDateSelect`, and nothing in the footer closes a `'multiple'`
+picker, matching how a day click behaves there. `closeOnSelect: false` opts a
+single button out, for a jump-to action you expect the user to adjust from.
+
+`todayButton` and `englishDates` each take **a boolean or an object** — the
+boolean for the common case, the object to configure it. In the object form
+`enabled` defaults to `true`, so `{ label: 'Jump' }` reads as "on, with this
+label".
+
+All three are **opt-in**. A picker that configures none of them renders exactly
+as it did in 2.14.0.
+
+### Changed
+
+- **The header controls are no longer cell-sized.** The month and year buttons
+  and the two arrows read a new token, `--ap-header-control` (`2rem`, `1.75rem`
+  compact), instead of `--ap-cell`. A cell-tall control is a lot of padding
+  around a word, and it was getting worse: with `englishDates` the cell grows
+  to `2.625rem` and the header grew with it, for a row that has no grid to line
+  up with. The grid itself is untouched.
+
+### Fixed
+
+- **The calendar could be clipped by its own card in a narrow container.**
+  `.ap-card` is `max-width: fit-content`, which is clamped by the space
+  available, so in a container narrower than the calendar the card shrank while
+  the rows — which are flex and `nowrap` — did not. The last column was cut off
+  and a scrollbar appeared under it.
+
+  It surfaced with `englishDates`, where the cell grows to `2.625rem`, but
+  any wide-enough configuration could hit it: `daysFormat: 'ddd'` is a `4rem`
+  cell and Nepali day names `5rem`. The card now carries
+  `min-width: max-content`, so it overflows a too-small container visibly
+  instead of quietly losing Saturday.
+
+- **An inline calendar could paint over an open popup.** Both carried
+  `z-index: 10`, so paint order fell to DOM order and any inline calendar
+  further down the page covered an open picker above it. Inline cards are
+  `z-index: auto` now — they sit in the flow and have nothing to stack above.
+
+- **The month and year panels stretched to the calendar's full height**, which
+  made twelve cells grow to fill it and a month grid look nothing like a month
+  grid. The calendar leaves the layout while a panel is open, so the card is
+  exactly as tall as the panel. Its width is held for the duration, so the
+  picker does not resize as it opens.
+
+- **With `englishDates` on, selecting a date wrote the wrong day.** The day
+  was read back out of the cell's text, and a cell holding two numbers reads as
+  one: `"१३29"` decoded to `1329` and parsed as day **29** for a cell showing
+  day 13. Every mode was affected. The day is carried as a data attribute now
+  rather than recovered from the rendering.
+
+- **Clicking the Gregorian number in a cell did nothing.** The document click
+  listener matched `event.target` exactly against `.ap-cell-button`, so a click
+  landing on the secondary number — a `<span>` inside the button — was ignored,
+  which reads as the first click not registering. It resolves with `closest()`
+  now, so anywhere in the cell works.
+
+- **The picker got slower the more you navigated, and hover stopped showing.**
+  The previous/next listeners were added on every call of the method that wires
+  them, and that method runs from both select change handlers — so every month
+  or year change through a dropdown, and therefore every choice made in the
+  grid panels, left another pair of click listeners on the arrows. One press
+  then ran all of them: after four changes a single click rendered the calendar
+  **five times**, and it kept growing. The hover styling looked broken because
+  the cells were being destroyed and rebuilt under the pointer.
+
+  It was also wrong, not just slow. Each listener closed over the year and
+  month of the render that created it, so the stale ones disagreed about the
+  destination and the month you landed on was whichever ran last. They are
+  bound once per card now and read the current values off the selects.
+
+- **A date chosen from the footer was written to the input but not highlighted
+  in the calendar.** Basic mode kept no record of its selection — the class
+  went straight onto the clicked element — so nothing that selected a date
+  without a click could show it, and the highlight was lost on navigating to
+  another month and back. The selection is remembered and repainted now, which
+  fixes both.
+
+- **The footer button that produced the current selection is marked**, with
+  `selected` and `aria-pressed`, and cleared when a day is clicked directly.
+
 ## [2.14.0] - 2026-10-17
 
 ### Added
