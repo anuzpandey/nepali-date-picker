@@ -8,6 +8,56 @@ repository at release time, alongside `dist/` and the docs.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.14.0] - 2026-10-17
+
+### Added
+
+- **Grid pickers for the month and year.** The header's two dropdowns are now
+  buttons that open a grid over the calendar. The year one used to carry **91
+  options**, BS 2000 to 2090 — a long scroll to reach a birth year and worse on
+  a phone. It is twelve years at a time now, centred on the year in view, eight
+  pages for the whole table.
+
+  **Year leads to month leads to date.** Choosing a year opens the month grid
+  rather than dropping back to the calendar, because after moving years you are
+  almost never in the month you want. From the month grid the year in the
+  header is a button back to the years.
+
+- **The header is keyboard operable.** Arrow keys move across the grid, `Home`
+  and `End` jump to its ends, `PageUp` and `PageDown` turn the page, `Enter` or
+  `Space` chooses, `Escape` closes and returns focus to the header. The grid is
+  a `listbox` of `option`s with `aria-selected`, and the triggers declare
+  `aria-haspopup` and `aria-expanded`.
+
+- **Five styling classes:** `ap-header__trigger`, `ap-panel`, `ap-panel__label`,
+  `ap-panel__grid` and `ap-panel__cell`. The current month or year carries
+  `selected`, the same class a selected day uses, so it inherits the theme.
+
+### Changed
+
+- **The month and year `<select>` elements are now visually hidden rather than
+  removed.** `.ap-calendar-month` and `.ap-calendar-year` still hold the same
+  values and still re-render the calendar when you set `.value` and dispatch
+  `change`, so code driving the picker that way is unaffected. They carry
+  `aria-hidden` and `tabindex="-1"` so assistive technology and tab order see
+  the header buttons instead of two controls for the same thing.
+
+### Fixed
+
+- **The select change listeners were being registered on every render.** They
+  were added inside the render routine behind a `removeEventListener` call that
+  could never match — an anonymous function is a new reference each time — so
+  they accumulated. Because each handler itself triggers a render, which
+  registered another pair, the count doubled on every change made through the
+  dropdowns: the fifth one re-rendered the calendar **32 times**.
+
+  Nothing looked wrong, since rendering is idempotent. It showed up only as the
+  picker getting slower the longer someone spent choosing a month.
+
+  Fixing it also fixed a staleness bug in the same code: the year handler
+  closed over the month from the render that created it, so changing the year
+  after changing the month could revert the month.
+
 ## [2.13.0] - 2026-10-17
 
 ### Added

@@ -320,6 +320,66 @@ inherit the theme.
 }
 ```
 
+## Choosing a month or year
+
+The header shows the current month and year as buttons. Clicking either opens a
+grid over the calendar:
+
+- **Year** — twelve years at a time, centred on the year in view, with chevrons
+  to page through. The bundled table covers BS 2000–2090, so that is eight pages.
+- **Month** — the twelve months, with chevrons to step the year.
+
+Choosing a **year leads to the month grid**, and choosing a month returns to the
+days — year, then month, then date. From the month grid the year in the header
+is a button back to the years.
+
+Everything is keyboard operable: arrow keys move across the grid, `Home` and
+`End` jump to its ends, `PageUp` and `PageDown` turn the page, `Enter` or
+`Space` chooses, and `Escape` closes and returns focus to the header.
+
+### The hidden `<select>` elements
+
+Before this the header was two native `<select>`s, and the year one carried 91
+options. They are still there, still carrying the same values, but visually
+hidden — so anything that drove the picker through them keeps working:
+
+```javascript
+const card = document.querySelector('.ap-card');
+
+card.querySelector('.ap-calendar-year').value = '2085';
+card.querySelector('.ap-calendar-year').dispatchEvent(new Event('change'));
+```
+
+They are marked `aria-hidden` and `tabindex="-1"`, so assistive technology and
+tab order see the header buttons instead of two controls for the same thing.
+
+### Styling
+
+| Class | On |
+|---|---|
+| `ap-header__trigger` | the month and year buttons in the header |
+| `ap-month-trigger` / `ap-year-trigger` | each one specifically |
+| `ap-panel` | the grid overlay |
+| `ap-panel__label` | the year or range in the panel header |
+| `ap-panel__grid` | the grid itself, a `listbox` |
+| `ap-panel__cell` | each month or year, an `option` |
+
+The current month or year carries `selected`, the same class a selected day
+uses, so it inherits the theme and dark mode without a second rule.
+
+```css
+.ap-panel__cell.selected {
+  background: #4f46e5;
+  color: #ffffff;
+}
+```
+
+The panel **overlays** the calendar rather than replacing it, and the calendar
+keeps its space with `visibility: hidden`. That is deliberate: `.ap-card` is
+`max-width: fit-content`, so taking the calendar out of the layout would
+collapse the card onto the panel's own width and the picker would change size
+as you opened it.
+
 ## Sizing
 
 The picker is laid out on a single cell size. `compact: true` drops that cell from

@@ -328,6 +328,164 @@
 }
 
 /*
+ * Month and year grid pickers (P5-T17).
+ *
+ * The two <select>s are still the state but are visually hidden; these panels
+ * are what the user actually operates. .ap-visually-hidden rather than
+ * display:none so the elements keep a value and stay settable from script -
+ * six places in the source read them, and so do existing consumers.
+ */
+.ap-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* The month and year labels in the header, which open the panels. */
+.ap-header__trigger {
+    appearance: none;
+    font: inherit;
+    line-height: 1.8;
+    text-align: center;
+    height: var(--ap-cell);
+    padding: var(--ap-select-padding-y) var(--ap-select-padding-x);
+    border-radius: var(--rounded-md);
+    border: none;
+    background: var(--ap-white);
+    color: var(--ap-black);
+    cursor: pointer;
+    transition-property: color, background-color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.ap-header__trigger:hover {
+    background: var(--gray-100);
+}
+
+.ap-header__trigger:focus-visible {
+    outline: 2px solid var(--gray-400);
+    outline-offset: -2px;
+}
+
+/*
+ * The panel lies over the calendar rather than replacing it in the flow.
+ *
+ * Hiding the header and table with display:none made the card collapse onto
+ * the panel's own width, because .ap-card is max-width:fit-content - the
+ * calendar is what gives the card its size. Pinning a width instead would not
+ * hold either, since the table is wider under daysFormat:'ddd' and wider again
+ * in Nepali. Leaving the calendar in the layout with visibility:hidden keeps
+ * the card exactly the size it already was, whatever that size is.
+ */
+.ap-panel {
+    position: absolute;
+    inset: var(--ap-card-padding);
+    background: var(--ap-white);
+    display: flex;
+    flex-direction: column;
+}
+
+.ap-panel[hidden] {
+    display: none;
+}
+
+.ap-card.ap-panel-open > .ap-header,
+.ap-card.ap-panel-open > .ap-table {
+    visibility: hidden;
+}
+
+.ap-panel__header {
+    border-bottom: 1px solid var(--gray-200);
+    padding-bottom: var(--ap-gap);
+    margin-bottom: var(--ap-table-margin-top);
+}
+
+.ap-panel__label {
+    appearance: none;
+    font: inherit;
+    font-weight: 500;
+    color: var(--ap-black);
+    text-align: center;
+    flex: 1;
+    border: none;
+    background: transparent;
+    border-radius: var(--rounded-md);
+    padding: var(--ap-gap);
+    cursor: pointer;
+}
+
+/* In the year panel the label is a range, with nowhere further up to go. */
+.ap-panel__label:disabled {
+    cursor: default;
+}
+
+.ap-panel__label:not(:disabled):hover {
+    background: var(--gray-100);
+}
+
+.ap-panel__label:focus-visible {
+    outline: 2px solid var(--gray-400);
+    outline-offset: -2px;
+}
+
+.ap-panel__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
+    gap: var(--ap-gap);
+    flex: 1;
+}
+
+.ap-panel__cell {
+    appearance: none;
+    font: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--ap-cell);
+    padding: var(--ap-gap) calc(var(--ap-gap) * 2);
+    border: none;
+    border-radius: var(--rounded-md);
+    background: var(--ap-white);
+    color: var(--ap-black);
+    cursor: pointer;
+    white-space: nowrap;
+    transition-property: color, background-color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.ap-panel__cell:hover {
+    background: var(--gray-100);
+}
+
+.ap-panel__cell:focus-visible {
+    outline: 2px solid var(--gray-400);
+    outline-offset: -2px;
+}
+
+/*
+ * The current month or year reuses .selected rather than the mockup's blue, so
+ * it matches a selected day and picks up dark mode without a second rule.
+ */
+.ap-panel__cell.selected {
+    background: var(--ap-black);
+    color: var(--ap-white);
+}
+
+.ap-panel__cell:disabled {
+    color: var(--gray-400);
+    cursor: not-allowed;
+}
+
+/*
  * Range selection.
  *
  * The two ends reuse .selected, so they match a single-date selection and pick

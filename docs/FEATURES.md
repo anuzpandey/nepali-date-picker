@@ -73,6 +73,8 @@ Current feature status and planned enhancements.
 | Theme: soft | ✅ Done | v1.0 |
 | Theme: bordered | ✅ Done | v1.0 |
 | Compact sizing | ✅ Done | v2.12 |
+| Month & year grid pickers | ✅ Done | v2.14 |
+| Keyboard navigation in the header | ✅ Done | v2.14 |
 | Sizing custom properties | ✅ Done | v2.12 |
 
 ## Date Display
